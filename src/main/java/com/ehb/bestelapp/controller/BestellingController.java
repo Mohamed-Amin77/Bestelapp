@@ -4,6 +4,7 @@ import com.ehb.bestelapp.model.Bestelling;
 import com.ehb.bestelapp.repository.BestellingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,9 +30,10 @@ public class BestellingController {
 
     // Nieuwe bestelling toevoegen
     @PostMapping
-    public Bestelling create(@RequestBody Bestelling bestelling) {
+    public Bestelling create(@Valid @RequestBody Bestelling bestelling) {
         return bestellingRepository.save(bestelling);
     }
+
 
     // Bestelling bijwerken
     @PutMapping("/{id}")
