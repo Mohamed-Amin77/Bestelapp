@@ -5,6 +5,8 @@ import com.ehb.bestelapp.repository.MateriaalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +33,7 @@ public class MateriaalController {
 
     //Nieuw materiaal toevoegen
     @PostMapping
-    public Materiaal createMateriaal(@RequestBody Materiaal materiaal) {
+    public Materiaal create(@Valid @RequestBody Materiaal materiaal) {
         return materiaalRepository.save(materiaal);
     }
 
