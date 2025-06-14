@@ -1,6 +1,9 @@
 package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 
 //Deze klasse stelt een materiaal-item voor in de database
 @Entity
@@ -12,9 +15,15 @@ public class Materiaal {
     private Long id;
 
     //Eigenschappen van materiaal
+    @NotBlank(message = "Naam is verplicht")
     private String naam;
+    @NotBlank(message = "Categorie is verplicht")
     private String categorie;
+
+    @Min(value = 0, message = "Voorraad moet minimaal 0 zijn")
     private int voorraad;
+
+    @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
     //Lege constructor (voor jpa)
