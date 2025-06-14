@@ -1,35 +1,34 @@
 package com.ehb.bestelapp.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
-
-//Deze klasse stelt een materiaal-item voor in de database
 @Entity
 public class Materiaal {
 
-    //Uniek ID dat automatisch gegenereerd wordt
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //Eigenschappen van materiaal
     @NotBlank(message = "Naam is verplicht")
     private String naam;
+
     @NotBlank(message = "Categorie is verplicht")
     private String categorie;
 
-    @Min(value = 0, message = "Voorraad moet minimaal 0 zijn")
+    @Min(value = 0, message = "Voorraad moet ≥ 0 zijn")
     private int voorraad;
 
     @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
-    //Lege constructor (voor jpa)
-    public Materiaal() {}
+    public Materiaal() {
+    }
 
-    //Constructor met velden
     public Materiaal(String naam, String categorie, int voorraad, String omschrijving) {
         this.naam = naam;
         this.categorie = categorie;
@@ -37,7 +36,6 @@ public class Materiaal {
         this.omschrijving = omschrijving;
     }
 
-    //Getters en setters
     public Long getId() {
         return id;
     }
