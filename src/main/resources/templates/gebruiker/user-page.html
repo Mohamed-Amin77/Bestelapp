@@ -5,10 +5,9 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Alle Bestellingen</title>
 </head>
 <body>
-
 <header class="site-header">
     <div class="logo">
         <img src="logo.png" alt="Logo">
@@ -39,35 +38,42 @@
     </div>
 </div>
 
-<div class="dashboard-container">
-    <h2>Dashboard</h2>
+<!-- Hier komt de bestellingenlijst -->
+<div class="bestellingen-container">
+    <h2>Bestellingen</h2>
     <hr>
 
-    <div class="functionaliteiten">
-        <button class="functie bevestiging">Bevestigingsmateriaal</button>
-        <button class="functie pbm">Persoonlijke PBM</button>
-        <button class="functie gereedschap">Gereedschap</button>
-        <button class="functie onderhoud">Onderhoudsmaterialen</button>
-        <button class="functie aquafin">Aquafin-tools</button>
-        <button class="functie diversen">Diversen</button>
-    </div>
-
-    <h2>Meest gebruikte materialen</h2>
-
-    <div class="meest-gebruikte-materialen">
-        <div class="materiaal">
-            <img src="material1.jpg" alt="Materiaal 1">
-            <p>Materiaal 1</p>
-        </div>
-        <div class="materiaal">
-            <img src="material2.jpg" alt="Materiaal 2">
-            <p>Materiaal 2</p>
-        </div>
-        <div class="materiaal">
-            <img src="material3.jpg" alt="Materiaal 3">
-            <p>Materiaal 3</p>
-        </div>
-    </div>
+    <table class="bestellingen-tabel">
+        <thead>
+        <tr>
+            <th>Bestelnummer</th>
+            <th>Datum</th>
+            <th>Producten</th>
+            <th>Status</th>
+            <th>Leverdatum</th>
+            <th>Actie</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#ORD-2025034</td>
+            <td>04-06-2025</td>
+            <td><button class="product-button">12 producten</button></td>
+            <td>Bezig</td>
+            <td>07-06-2025</td>
+            <td><a href="#">Bekijk</a></td>
+        </tr>
+        <tr>
+            <td>#ORD-2025035</td>
+            <td>05-06-2025</td>
+            <td><button class="product-button">3 producten</button></td>
+            <td>Bezig</td>
+            <td>07-06-2025</td>
+            <td><a href="#">Bekijk</a></td>
+        </tr>
+        <!-- Extra bestellingen hier -->
+        </tbody>
+    </table>
 </div>
 
 </body>

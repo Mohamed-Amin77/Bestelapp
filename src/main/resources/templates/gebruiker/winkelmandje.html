@@ -3,33 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Winkelmandje</title>
     <link rel="stylesheet" href="/css/StyleWinkelmandje.css">
 </head>
-<table>
-    <thead>
-    <tr>
-        <th>Bestelnummer</th>
-        <th>Datum</th>
-        <th>Producten</th>
-        <th>Status</th>
-        <th>Leverdatum</th>
-        <th>Actie</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>#ORD-2025034</td>
-        <td>04-06-2025</td>
-        <td><button class="product-button" onclick="toonProducten('#ORD-2025034')">12 producten</button></td>
-        <td>Bezig</td>
-        <td>07-06-2025</td>
-        <td><a href="#">Bekijk</a></td>
-    </tr>
-    <!-- Meer rijen -->
-    </tbody>
-</table>
+<body>
 
+<!-- Header -->
+<header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <nav class="navigatie">
+        <a href="#">Home</a>
+        <a href="#">Materiaal toevoegen</a>
+        <a href="#">Alle bestellingen</a>
+        <a href="#">Winkelmandje</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<!-- Zoekbalk en filter -->
+<div class="zoekbalk-en-filter-container">
+    <div class="zoekbalk">
+        <input type="text" placeholder="Zoek iets...">
+        <button>Zoek</button>
+    </div>
+
+    <div class="filter">
+        <select>
+            <option value="">-- Kies een filter --</option>
+            <option value="optie1">Optie 1</option>
+            <option value="optie2">Optie 2</option>
+            <option value="optie3">Optie 3</option>
+            <option value="optie4">Optie 4</option>
+        </select>
+    </div>
+</div>
+
+<!-- Winkelmandje inhoud -->
+<div class="winkelmandje-container">
+    <h2>Winkelmandje</h2>
+    <hr>
+
+    <table class="bestellingen-tabel">
+        <thead>
+        <tr>
+            <th>Bestelnummer</th>
+            <th>Datum</th>
+            <th>Producten</th>
+            <th>Status</th>
+            <th>Leverdatum</th>
+            <th>Actie</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>#ORD-2025034</td>
+            <td>04-06-2025</td>
+            <td><button class="product-button" onclick="toonProducten('#ORD-2025034')">12 producten</button></td>
+            <td>Bezig</td>
+            <td>07-06-2025</td>
+            <td><a href="#">Bekijk</a></td>
+        </tr>
+        <!-- Meer rijen -->
+        </tbody>
+    </table>
+</div>
 
 </body>
 </html>
