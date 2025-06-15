@@ -10,16 +10,13 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.config.Customizer;
-
 
 @Configuration
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
+        http.csrf(csrf -> csrf.disable()) // alleen tijdelijk voor testen
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/dashboard").hasRole("ADMIN")
                         .requestMatchers("/api/**").authenticated()
@@ -38,7 +35,6 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 
     @Bean
     public UserDetailsService users() {
