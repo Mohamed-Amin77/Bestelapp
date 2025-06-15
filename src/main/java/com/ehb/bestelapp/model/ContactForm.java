@@ -1,11 +1,10 @@
 package com.ehb.bestelapp.model;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class ContactForm {
-
     @NotBlank(message = "E-mail of personeelsnummer is verplicht")
+    @Email(message = "Voer een geldige e-mail in")
     private String email;
 
     @NotBlank(message = "Categorie is verplicht")
@@ -14,7 +13,6 @@ public class ContactForm {
     @NotBlank(message = "Bericht mag niet leeg zijn")
     private String bericht;
 
-    // Getters en setters
     public String getEmail() {
         return email;
     }
