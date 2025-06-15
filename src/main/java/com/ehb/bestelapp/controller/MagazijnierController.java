@@ -14,4 +14,10 @@ public class MagazijnierController {
         return "magazijnier/dashboard";
     }
 
+    // Bestellingen bekijken (alle bestellingen voor magazijnier)
+    @GetMapping("/bestellingen")
+    public String bestellingenBekijken() {
+        return "magazijnier/alle-bestellingen";
+    }
+
 }

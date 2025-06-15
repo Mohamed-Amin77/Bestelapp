@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bestellingen Overzicht</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-100 p-6">
+<h1 class="text-2xl font-bold text-blue-800 mb-6">Overzicht van bestellingen</h1>
 
+<table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-blue-600 text-white">
+    <tr>
+        <th class="px-4 py-2 text-left">ID</th>
+        <th class="px-4 py-2 text-left">Datum</th>
+        <th class="px-4 py-2 text-left">Omschrijving</th>
+        <th class="px-4 py-2 text-left">Technieker</th>
+    </tr>
+    </thead>
+    <tbody th:each="bestelling : ${bestellingen}">
+    <tr class="border-b">
+        <td class="px-4 py-2" th:text="${bestelling.id}"></td>
+        <td class="px-4 py-2" th:text="${bestelling.datum}"></td>
+        <td class="px-4 py-2" th:text="${bestelling.omschrijving}"></td>
+        <td class="px-4 py-2" th:text="${bestelling.technieker}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
