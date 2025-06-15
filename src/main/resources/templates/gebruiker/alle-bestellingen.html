@@ -54,25 +54,17 @@
       <th>Actie</th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-      <td>#ORD-2025034</td>
-      <td>04-06-2025</td>
-      <td><button class="product-button">12 producten</button></td>
+    <tbody> <!-- voor elke rij moet je mij ... tonen !-->
+    <tr th:each="bestelling : ${bestellingen}">
+      <td th:text="'#ORD-' + bestelling.id"></td>
+      <td th:text="${bestelling.datum}"></td>
+      <td><button class="product-button">Producten</button></td>
       <td>Bezig</td>
-      <td>07-06-2025</td>
+      <td>-</td>
       <td><a href="#">Bekijk</a></td>
     </tr>
-    <tr>
-      <td>#ORD-2025035</td>
-      <td>05-06-2025</td>
-      <td><button class="product-button">3 producten</button></td>
-      <td>Bezig</td>
-      <td>07-06-2025</td>
-      <td><a href="#">Bekijk</a></td>
-    </tr>
-    <!-- Extra bestellingen hier -->
     </tbody>
+
   </table>
 </div>
 
