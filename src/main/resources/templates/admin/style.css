@@ -1,0 +1,56 @@
+header{
+    color: white;
+    background-color: black;
+    display: flex;
+
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+nav{
+    display: flex;
+    width: 100%;
+
+}
+
+li{
+    list-style: none;
+    text-decoration: none;
+
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+ul{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.kaartjes {
+    background-color: aqua;
+    height: 100px;
+    width: 250px;
+}
+
+.container-fonction {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 25px;
+
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 1200px;
+    gap: 35px
+;
+
+}
+
