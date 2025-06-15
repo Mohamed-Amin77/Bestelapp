@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
-
+<div th:fragment="navbar">
+    <nav class="bg-blue-800 text-white px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-semibold">Aquafin Magazijn</div>
+        <div>
+            <a th:href="@{/magazijnier/dashboard}" class="mr-4 hover:underline">Dashboard</a>
+            <a th:href="@{/logout}" class="hover:underline">Uitloggen</a>
+        </div>
+    </nav>
+</div>
 </body>
 </html>
