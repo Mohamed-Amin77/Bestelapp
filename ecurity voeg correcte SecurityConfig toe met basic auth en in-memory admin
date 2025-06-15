@@ -1,0 +1,13 @@
+[33m709a539[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m validatie: voeg veldvalidatie toe aan Bestelling POST endpoint
+[33m68b92ae[m validatie: voeg @Valid toe aan create-methode van MateriaalController
+[33m244f077[m validatie: voeg veldvalidaties toe aan Materiaal entity
+[33m294e576[m feat(model): validatie annotaties toevoegen aan Materiaal
+[33m26ff6c7[m chore: update pom.xml met validation, security en devtools dependencies
+[33m9922188[m fix: los merge-conflict op in pom.xml en voeg validatie + security dependencies toe
+[33mc0bfb9b[m Login en index pagina gelinkt. Lege Securiy config toegevoegd. Logincontroller aangemaakt en aangevuld.
+[33m6955bd7[m Login pagina toegevoegd en aangemaakt. En aparte navigaties per dashboard html's aangemaakt.
+[33mf224d7f[m Alle pagina's in templates toegevoegd
+[33me3a01f3[m index pagina aangemaakt voor inloggen
+[33m74f7242[m feat: voeg Materiaal entity toe
+[33m4a589ba[m Eerste versie materiaalbeheer - klaar
+[33mb60b922[m Initial commit

@@ -1,13 +1,12 @@
 package com.ehb.bestelapp.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "materialen")
 public class Materiaal {
 
     @Id
@@ -17,25 +16,19 @@ public class Materiaal {
     @NotBlank(message = "Naam is verplicht")
     private String naam;
 
-    @NotBlank(message = "Categorie is verplicht")
-    private String categorie;
+    @NotNull(message = "Aantal is verplicht")
+    @Min(value = 0, message = "Aantal moet 0 of meer zijn")
+    private Integer aantal;
 
-    @Min(value = 0, message = "Voorraad moet ≥ 0 zijn")
-    private int voorraad;
+    // Constructors
+    public Materiaal() {}
 
-    @NotBlank(message = "Omschrijving is verplicht")
-    private String omschrijving;
-
-    public Materiaal() {
-    }
-
-    public Materiaal(String naam, String categorie, int voorraad, String omschrijving) {
+    public Materiaal(String naam, Integer aantal) {
         this.naam = naam;
-        this.categorie = categorie;
-        this.voorraad = voorraad;
-        this.omschrijving = omschrijving;
+        this.aantal = aantal;
     }
 
+    // Getters en Setters
     public Long getId() {
         return id;
     }
@@ -52,27 +45,11 @@ public class Materiaal {
         this.naam = naam;
     }
 
-    public String getCategorie() {
-        return categorie;
+    public Integer getAantal() {
+        return aantal;
     }
 
-    public void setCategorie(String categorie) {
-        this.categorie = categorie;
-    }
-
-    public int getVoorraad() {
-        return voorraad;
-    }
-
-    public void setVoorraad(int voorraad) {
-        this.voorraad = voorraad;
-    }
-
-    public String getOmschrijving() {
-        return omschrijving;
-    }
-
-    public void setOmschrijving(String omschrijving) {
-        this.omschrijving = omschrijving;
+    public void setAantal(Integer aantal) {
+        this.aantal = aantal;
     }
 }

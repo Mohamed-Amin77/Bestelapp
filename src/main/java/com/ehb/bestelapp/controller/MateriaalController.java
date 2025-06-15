@@ -2,16 +2,13 @@ package com.ehb.bestelapp.controller;
 
 import com.ehb.bestelapp.model.Materiaal;
 import com.ehb.bestelapp.repository.MateriaalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-//REST-controller voor Materiaal
 @RestController
 @RequestMapping("/api/materiaal")
 public class MateriaalController {
@@ -19,46 +16,40 @@ public class MateriaalController {
     @Autowired
     private MateriaalRepository materiaalRepository;
 
-    //Alles opvragen
+    // Alles opvragen
     @GetMapping
     public List<Materiaal> getAll() {
         return materiaalRepository.findAll();
     }
 
-    //specifiek materiaal opvragen (ID)
+    // Specifiek materiaal opvragen
     @GetMapping("/{id}")
     public Optional<Materiaal> getById(@PathVariable Long id) {
         return materiaalRepository.findById(id);
     }
 
-    //Nieuw materiaal toevoegen
+    // Nieuw materiaal toevoegen
     @PostMapping
     public Materiaal create(@Valid @RequestBody Materiaal materiaal) {
         return materiaalRepository.save(materiaal);
     }
 
-    //Bestaand materiaal updaten
+    // Materiaal bijwerken
     @PutMapping("/{id}")
-    public ResponseEntity<Materiaal> updateMateriaal(@PathVariable Long id, @RequestBody Materiaal updated) {
-        Optional<Materiaal> optional = materiaalRepository.findById(id);
-
-        if (optional.isPresent()) {
-            Materiaal m = optional.get();
+    public Materiaal update(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
+        return materiaalRepository.findById(id).map(m -> {
             m.setNaam(updated.getNaam());
-            m.setCategorie(updated.getCategorie());
-            m.setVoorraad(updated.getVoorraad());
-            m.setOmschrijving(updated.getOmschrijving());
-
-            Materiaal opgeslagen = materiaalRepository.save(m);
-            return ResponseEntity.ok(opgeslagen);
-        } else {
-            return ResponseEntity.notFound().build(); // Geen materiaal met dit ID
-        }
+            m.setAantal(updated.getAantal());
+            return materiaalRepository.save(m);
+        }).orElseGet(() -> {
+            updated.setId(id);
+            return materiaalRepository.save(updated);
+        });
     }
 
-    //Materiaal verwijderen
+    // Materiaal verwijderen
     @DeleteMapping("/{id}")
-    public void deleteMateriaal(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         materiaalRepository.deleteById(id);
     }
 }

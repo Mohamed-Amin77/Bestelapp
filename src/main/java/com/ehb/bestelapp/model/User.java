@@ -1,18 +1,32 @@
 package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "gebruikers") //
+@Table(name = "gebruikers", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Naam is verplicht")
     private String naam;
+
+    @NotBlank(message = "Email is verplicht")
+    @Email(message = "Ongeldig emailadres")
     private String email;
+
+    @NotBlank(message = "Wachtwoord is verplicht")
+    @Size(min = 6, message = "Wachtwoord moet minstens 6 tekens bevatten")
     private String wachtwoord;
+
+    @NotBlank(message = "Rol is verplicht")
     private String rol; // admin, technieker
 
     public User() {}

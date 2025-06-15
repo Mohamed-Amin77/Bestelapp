@@ -1,38 +1,65 @@
 package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Bestelling {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String bestellerNaam;
-    private LocalDate datum;
-    private String status;
+    @NotNull(message = "Datum is verplicht")
+    private String datum;
 
-    // Lege constructor (voor JPA)
-    public Bestelling() {}
+    @NotBlank(message = "Omschrijving is verplicht")
+    private String omschrijving;
 
-    // Constructor
-    public Bestelling(String bestellerNaam, LocalDate datum, String status) {
-        this.bestellerNaam = bestellerNaam;
-        this.datum = datum;
-        this.status = status;
+    @NotNull(message = "Technieker is verplicht")
+    private Long technieker;
+
+    public Bestelling() {
     }
 
-    // Getters en setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Bestelling(String datum, String omschrijving, Long technieker) {
+        this.datum = datum;
+        this.omschrijving = omschrijving;
+        this.technieker = technieker;
+    }
 
-    public String getBestellerNaam() { return bestellerNaam; }
-    public void setBestellerNaam(String bestellerNaam) { this.bestellerNaam = bestellerNaam; }
+    // GETTERS EN SETTERS
 
-    public LocalDate getDatum() { return datum; }
-    public void setDatum(LocalDate datum) { this.datum = datum; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public String getOmschrijving() {
+        return omschrijving;
+    }
+
+    public void setOmschrijving(String omschrijving) {
+        this.omschrijving = omschrijving;
+    }
+
+    public Long getTechnieker() {
+        return technieker;
+    }
+
+    public void setTechnieker(Long technieker) {
+        this.technieker = technieker;
+    }
 }

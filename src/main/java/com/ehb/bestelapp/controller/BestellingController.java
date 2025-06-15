@@ -2,15 +2,15 @@ package com.ehb.bestelapp.controller;
 
 import com.ehb.bestelapp.model.Bestelling;
 import com.ehb.bestelapp.repository.BestellingRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/bestelling")
+@RequestMapping("/api/bestellingen")
 public class BestellingController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class BestellingController {
         return bestellingRepository.findAll();
     }
 
-    // Eén bestelling opvragen (ID)
+    // Eén bestelling opvragen (via ID)
     @GetMapping("/{id}")
     public Optional<Bestelling> getById(@PathVariable Long id) {
         return bestellingRepository.findById(id);
@@ -34,14 +34,13 @@ public class BestellingController {
         return bestellingRepository.save(bestelling);
     }
 
-
-    // Bestelling bijwerken
+    // Bestaande bestelling updaten
     @PutMapping("/{id}")
-    public Bestelling update(@PathVariable Long id, @RequestBody Bestelling updated) {
+    public Bestelling update(@PathVariable Long id, @Valid @RequestBody Bestelling updated) {
         return bestellingRepository.findById(id).map(b -> {
-            b.setBestellerNaam(updated.getBestellerNaam());
             b.setDatum(updated.getDatum());
-            b.setStatus(updated.getStatus());
+            b.setOmschrijving(updated.getOmschrijving());
+            b.setTechnieker(updated.getTechnieker());
             return bestellingRepository.save(b);
         }).orElseGet(() -> {
             updated.setId(id);
