@@ -4,6 +4,7 @@ import com.ehb.bestelapp.model.User;
 import com.ehb.bestelapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class UserController {
 
     // Nieuwe gebruiker toevoegen
     @PostMapping
-    public User create(@RequestBody User user) {
+    public User create(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
 
