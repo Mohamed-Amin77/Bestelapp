@@ -2,9 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle Bestellingen</title>
 </head>
 <body>
+
+<!-- Header met navigatie -->
+<header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <nav class="navigatie">
+        <a href="#">Home</a>
+        <a href="#">Materiaal toevoegen</a>
+        <a href="#">Alle bestellingen</a>
+        <a href="#">Winkelmandje</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<!-- Filters -->
+<div class="zoekbalk-en-filter-container">
+    <div class="zoekbalk">
+        <input type="text" placeholder="Zoek iets...">
+        <button>Zoek</button>
+    </div>
+
+    <div class="filter">
+        <select>
+            <option value="">-- Kies een filter --</option>
+            <option value="optie1">Optie 1</option>
+            <option value="optie2">Optie 2</option>
+            <option value="optie3">Optie 3</option>
+            <option value="optie4">Optie 4</option>
+        </select>
+    </div>
+</div>
+
+<!-- Hier komt de bestellingenlijst -->
+<div class="bestellingen-container">
+    <h2>Bestellingen</h2>
+    <hr>
+
+    <table class="bestellingen-tabel">
+        <thead>
+        <tr>
+            <th>Personeel ID</th>
+            <th>Bestelnummer</th>
+            <th>Datum</th>
+            <th>Producten</th>
+            <th>Status</th>
+            <th>Leverdatum</th>
+            <th>Actie</th>
+        </tr>
+        </thead>
+        <tbody> <!-- voor elke rij moet je mij ... tonen !-->
+        <tr th:each="bestelling : ${bestellingen}">
+            <td th:text="${bestelling.personeelId}">PersoneelID</td>
+            <td th:text="'#ORD-' + bestelling.id"></td>
+            <td th:text="${bestelling.datum}"></td>
+            <td><button class="product-button">Producten</button></td>
+            <td>Bezig</td>
+            <td>-</td>
+            <td><a href="#">Bekijk</a></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+
+
 
 </body>
 </html>
