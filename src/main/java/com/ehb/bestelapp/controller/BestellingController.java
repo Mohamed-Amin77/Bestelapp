@@ -4,6 +4,7 @@ import com.ehb.bestelapp.model.Bestelling;
 import com.ehb.bestelapp.repository.BestellingRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 
@@ -64,4 +65,11 @@ public class BestellingController {
         return bestellingRepository.findByTechniekerEmail(email);
     }
 
+    @GetMapping("/bestellingen")
+    public String alleBestellingen(Model model) {
+        return "gebruiker/alle-bestellingen";
+        // verwijst naar alle-bestellingen.html
+    }
 }
+
+
