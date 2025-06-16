@@ -1,4 +1,5 @@
-package com.ehb.bestelapp.model;
+
+        package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -17,17 +18,25 @@ public class Bestelling {
     @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
+<<<<<<< HEAD
+    // Technieker als relatie naar User in plaats van alleen een Long id
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "technieker_id")
+    private User technieker;
+=======
     @NotNull(message = "Technieker is verplicht")
     private Long technieker;
     private String status;
     private String leverdatum;
 
+>>>>>>> 7561452d70749d63b565b718ae0d6f04294c3efc
 
+    private String status;
 
     public Bestelling() {
     }
 
-    public Bestelling(String datum, String omschrijving, Long technieker) {
+    public Bestelling(String datum, String omschrijving, User technieker) {
         this.datum = datum;
         this.omschrijving = omschrijving;
         this.technieker = technieker;
@@ -68,13 +77,14 @@ public class Bestelling {
         this.omschrijving = omschrijving;
     }
 
-    public Long getTechnieker() {
+    public User getTechnieker() {
         return technieker;
     }
 
-    public void setTechnieker(Long technieker) {
+    public void setTechnieker(User technieker) {
         this.technieker = technieker;
     }
+
     public String getStatus() {
         return status;
     }
