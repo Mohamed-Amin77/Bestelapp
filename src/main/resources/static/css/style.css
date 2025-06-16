@@ -1,38 +1,92 @@
-header{
-    color: white;
-    background-color: black;
-    display: flex;
-
-}
-body{
+/* Algemene layout */
+body {
     margin: 0;
     padding: 0;
-}
-nav{
+    background-color: #eff6ff;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
     display: flex;
-    width: 100%;
-
+    flex-direction: column;
 }
 
-li{
-    list-style: none;
-    text-decoration: none;
-
-}
-a{
-    text-decoration: none;
+/* Header */
+header {
+    background-color: #1d4ed8;
     color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
 }
-ul{
+
+.logo img {
+    height: 40px;
+}
+
+/* Navigatie */
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+ul {
     display: flex;
     width: 100%;
     justify-content: space-around;
+    padding: 0;
+    margin: 0;
 }
 
-.kaartjes {
-    background-color: aqua;
-    height: 100px;
-    width: 250px;
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Zoekbalk en filters */
+.zoekbalk-en-filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.zoekbalk input {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.zoekbalk button {
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.filter select {
+    padding: 0.5rem;
+    border-radius: 6px;
+}
+
+/* Dashboard & container */
+.dashboard-container {
+    background-color: white;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .container-fonction {
@@ -40,42 +94,38 @@ ul{
     width: 100%;
     justify-content: center;
     margin-top: 25px;
-
 }
 
-.container{
+.container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     width: 1200px;
-    gap: 35px
-;
-
+    gap: 35px;
 }
 
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-button {
-    background-color: black;
+/* Buttons & functies */
+button,
+.functie {
+    background-color: #1e40af;
     color: white;
     border: none;
     padding: 10px 20px;
-    cursor: pointer;
     height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover,
+.functie:hover {
+    background-color: #1d4ed8;
+}
+
+.submit-btn {
+    margin-top: 25px;
 }
 
 .button {
@@ -92,6 +142,49 @@ button {
     background-color: #3e8e41;
 }
 
-.submit-btn{
-    margin-top: 25px;
+/* Materialen-kaarten */
+.kaartjes,
+.materiaal {
+    background-color: white;
+    height: 100px;
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+}
+
+.materiaal img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.meest-gebruikte-materialen {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+/* Tabellen */
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f0f0f0;
 }
