@@ -54,16 +54,17 @@
       <th>Actie</th>
     </tr>
     </thead>
-    <tbody> <!-- voor elke rij moet je mij ... tonen !-->
+    <tbody>
     <tr th:each="bestelling : ${bestellingen}">
       <td th:text="'#ORD-' + bestelling.id"></td>
       <td th:text="${bestelling.datum}"></td>
-      <td><button class="product-button">Producten</button></td>
-      <td>Bezig</td>
-      <td>-</td>
+      <td><button class="product-button" th:text="${bestelling.omschrijving}"></button></td>
+      <td th:text="${bestelling.status}"></td>
+      <td th:text="${bestelling.leverdatum}"></td>
       <td><a href="#">Bekijk</a></td>
     </tr>
     </tbody>
+
 
   </table>
 </div>

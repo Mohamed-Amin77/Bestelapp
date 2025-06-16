@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Materiaal</title>
 </head>
 <body>
+
+<!-- Header met navigatie -->
+<header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <nav class="navigatie">
+        <a href="#">Home</a>
+        <a href="#">Materiaal toevoegen</a>
+        <a href="#">Alle bestellingen</a>
+        <a href="#">Winkelmandje</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<!-- Succes- of foutmeldingen -->
+<p th:if="${successMessage}" th:text="${successMessage}" class="success-message"></p>
+<p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
+
+
+<main class="materiaal-toevoegen-container">
+    <h1>Nieuw Materiaal Toevoegen</h1>
+
+    <form th:action="@{/magazijnier/add-materiaal}" th:object="${materiaal}" method="post" enctype="multipart/form-data">
+        <div class="form-groep">
+            <label>Productnaam</label>
+            <input type="text" th:field="*{naam}" placeholder="productnaam">
+        </div>
+
+        <div class="form-groep">
+            <label>Productcode</label>
+            <input type="text" th:field="*{code}" placeholder="productcode">
+        </div>
+
+        <div class="form-groep">
+            <label>Kies Categorie</label>
+            <input type="text" th:field="*{categorie}" placeholder="PBM">
+        </div>
+
+        <div class="form-groep">
+            <label>Productomschrijving</label>
+            <textarea th:field="*{omschrijving}" placeholder="schrijf hier..."></textarea>
+        </div>
+
+        <div class="form-groep">
+            <label>Voorraad</label>
+            <input type="number" th:field="*{voorraad}" placeholder="Aantal beschikbaar">
+        </div>
+
+        <div class="form-groep">
+            <label>Afbeelding</label>
+            <input type="file" name="afbeelding">
+        </div>
+
+        <button type="submit" class="toevoegen-knop">Voeg nieuw materiaal toe</button>
+    </form>
+</main>
 
 </body>
 </html>

@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Materiaal</title>
 </head>
 <body>
+
+<!-- Header met navigatie -->
+<header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <nav class="navigatie">
+        <a href="#">Home</a>
+        <a href="#">Materiaal toevoegen</a>
+        <a href="#">Alle bestellingen</a>
+        <a href="#">Winkelmandje</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+
+<h2>Materiaal bewerken</h2>
+
+<!-- Succes- of foutmeldingen -->
+<p th:if="${successMessage}" th:text="${successMessage}" class="success-message"></p>
+<p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
+
+<!-- Formulier voor materiaalbewerking -->
+<form th:action="@{'/magazijnier/edit-materiaal/' + ${materiaal.id}}"
+      th:object="${materiaal}"
+      method="post"
+      enctype="multipart/form-data"
+      class="materiaal-formulier">
+
+    <label for="naam">Naam</label>
+    <input type="text" id="naam" th:field="*{naam}" required>
+
+    <label for="code">Code</label>
+    <input type="text" id="code" th:field="*{code}" required>
+
+    <label for="categorie">Categorie</label>
+    <input type="text" id="categorie" th:field="*{categorie}">
+
+    <label for="omschrijving">Omschrijving</label>
+    <textarea id="omschrijving" th:field="*{omschrijving}"></textarea>
+
+    <label for="voorraad">Voorraad</label>
+    <input type="number" id="voorraad" th:field="*{voorraad}" min="0" required>
+
+    <label for="afbeelding">Afbeelding</label>
+    <input type="file" id="afbeelding" name="afbeelding">
+
+    <button type="submit">Materiaal bijwerken</button>
+</form>
 
 </body>
 </html>

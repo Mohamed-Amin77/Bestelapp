@@ -18,10 +18,18 @@ public class Bestelling {
     @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
+<<<<<<< HEAD
     // Technieker als relatie naar User in plaats van alleen een Long id
     @ManyToOne(optional = false)
     @JoinColumn(name = "technieker_id")
     private User technieker;
+=======
+    @NotNull(message = "Technieker is verplicht")
+    private Long technieker;
+    private String status;
+    private String leverdatum;
+
+>>>>>>> 7561452d70749d63b565b718ae0d6f04294c3efc
 
     private String status;
 
@@ -35,6 +43,15 @@ public class Bestelling {
     }
 
     // GETTERS EN SETTERS
+
+
+    public String getLeverdatum() {
+        return leverdatum;
+    }
+
+    public void setLeverdatum(String leverdatum) {
+        this.leverdatum = leverdatum;
+    }
 
     public Long getId() {
         return id;
