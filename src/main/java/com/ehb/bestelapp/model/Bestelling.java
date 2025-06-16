@@ -20,6 +20,8 @@ public class Bestelling {
     @NotNull(message = "Technieker is verplicht")
     private Long technieker;
     private String status;
+    private String leverdatum;
+
 
 
     public Bestelling() {
@@ -32,6 +34,15 @@ public class Bestelling {
     }
 
     // GETTERS EN SETTERS
+
+
+    public String getLeverdatum() {
+        return leverdatum;
+    }
+
+    public void setLeverdatum(String leverdatum) {
+        this.leverdatum = leverdatum;
+    }
 
     public Long getId() {
         return id;
