@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header>
+    <nav>
+        <img src="" alt="logo">
+        <ul>
 
+            <li>
+                <a href="index2.html">Home</a>
+            </li>
+            <li>
+                <a href="">Account</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container-fonction">
+    <button onclick="history.back()">Terug</button>
+    <div class="container">
+        <div class="persoon">
+            <form action="" method="post">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Naam</th>
+                        <th>Voornaam</th>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="id" required></td>
+                        <td><input type="text" name="naam" required></td>
+                        <td><input type="text" name="voornaam" required></td>
+                    </tr>
+                </table>
+                <button type="submit" class="submit-btn">Toevoegen</button>
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>
