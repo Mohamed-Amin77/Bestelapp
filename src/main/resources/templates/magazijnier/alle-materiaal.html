@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle Materiaal</title>
+</head>
+<body>
+
+
+<!-- Header met navigatie -->
+<header class="site-header">
+    <div class="logo">
+        <img src="logo.png" alt="Logo">
+    </div>
+    <nav class="navigatie">
+        <a href="#">Home</a>
+        <a href="#">Materiaal toevoegen</a>
+        <a href="#">Alle bestellingen</a>
+        <a href="#">Winkelmandje</a>
+        <a href="#">Login</a>
+    </nav>
+</header>
+
+<!-- Filters -->
+<div class="zoekbalk-en-filter-container">
+    <div class="zoekbalk">
+        <input type="text" placeholder="Zoek iets...">
+        <button>Zoek</button>
+    </div>
+
+    <div class="filter">
+        <select>
+            <option value="">-- Kies een filter --</option>
+            <option value="optie1">Optie 1</option>
+            <option value="optie2">Optie 2</option>
+            <option value="optie3">Optie 3</option>
+            <option value="optie4">Optie 4</option>
+        </select>
+    </div>
+</div>
+
+<!-- Nieuw materiaal toevoegen -->
+<div class="toevoegen-knop-container">
+    <a th:href="@{/magazijnier/add-materiaal}" class="toevoegen-knop">Nieuw Materiaal Toevoegen</a>
+</div>
+
+
+<!-- Materialentabel -->
+<div class="materialen-container">
+    <h2>Alle Materialen</h2>
+    <hr>
+
+    <table class="materialen-tabel">
+        <thead>
+        <tr>
+            <th>Productnaam</th>
+            <th>Categorie</th>
+            <th>Productcode</th>
+            <th>Omschrijving</th>
+            <th>Voorraad</th>
+            <th>Afbeelding</th>
+            <th>Acties</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="materiaal : ${materialen}">
+            <td th:text="${materiaal.naam}">Naam</td>
+            <td th:text="${materiaal.categorie}">Categorie</td>
+            <td th:text="${materiaal.code}">Code</td>
+            <td th:text="${materiaal.omschrijving}">Omschrijving</td>
+            <td th:text="${materiaal.voorraad}">0</td>
+            <td><a th:href="@{${materiaal.afbeelding}}" target="_blank">PNG</a></td>
+            <td>
+                <a th:href="@{'/magazijnier/edit-materiaal/' + ${materiaal.id}}" class="bewerk-knop">Bewerken</a>
+
+                <form th:action="@{'/magazijnier/delete-materiaal/' + ${materiaal.id}}"
+                      method="post"
+                      style="display:inline;"
+                      onsubmit="return confirm('Weet je zeker dat je dit materiaal wilt verwijderen?');">
+
+                    <button type="submit" class="verwijder-knop">Verwijderen</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+</body>
+</html>
