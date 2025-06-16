@@ -34,12 +34,13 @@ public class MateriaalController {
         return materiaalRepository.save(materiaal);
     }
 
-    // Materiaal bijwerken
+    // Materiaal bijwerken (categorie toevoegen)
     @PutMapping("/{id}")
     public Materiaal update(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
         return materiaalRepository.findById(id).map(m -> {
             m.setNaam(updated.getNaam());
             m.setAantal(updated.getAantal());
+            m.setCategorie(updated.getCategorie());
             return materiaalRepository.save(m);
         }).orElseGet(() -> {
             updated.setId(id);
@@ -51,5 +52,11 @@ public class MateriaalController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         materiaalRepository.deleteById(id);
+    }
+
+    // Nieuw toegevoegd: filteren op categorie
+    @GetMapping("/categorie/{categorie}")
+    public List<Materiaal> getByCategorie(@PathVariable String categorie) {
+        return materiaalRepository.findByCategorie(categorie);
     }
 }

@@ -20,12 +20,16 @@ public class Materiaal {
     @Min(value = 0, message = "Aantal moet 0 of meer zijn")
     private Integer aantal;
 
+    @NotBlank(message = "Categorie is verplicht")
+    private String categorie;
+
     // Constructors
     public Materiaal() {}
 
-    public Materiaal(String naam, Integer aantal) {
+    public Materiaal(String naam, Integer aantal, String categorie) {
         this.naam = naam;
         this.aantal = aantal;
+        this.categorie = categorie;
     }
 
     // Getters en Setters
@@ -51,5 +55,13 @@ public class Materiaal {
 
     public void setAantal(Integer aantal) {
         this.aantal = aantal;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
 }
