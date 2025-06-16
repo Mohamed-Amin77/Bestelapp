@@ -22,6 +22,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(
                 gebruiker.getEmail(),
                 gebruiker.getWachtwoord(),
+                // Rol wordt toegevoegd in juiste vorm: "ROLE_ROLNAAM"
                 Collections.singleton(() -> "ROLE_" + gebruiker.getRol().toUpperCase())
         );
     }

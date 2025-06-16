@@ -61,6 +61,8 @@ public class UserController {
 
             u.setRol(updated.getRol());
             return userRepository.save(u);
+
+        // Als er geen gebruiker met dat ID is, wordt er een nieuwe gebruiker aangemaakt met die ID
         }).orElseGet(() -> {
             updated.setId(id);
             updated.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));

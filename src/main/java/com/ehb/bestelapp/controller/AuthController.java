@@ -19,21 +19,24 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder; // Om wachtwoorden te checken (encryptie)
 
     @PostMapping("/login")
     public Map<String, Object> login(@Valid @RequestBody LoginRequest loginRequest) {
         Map<String, Object> response = new HashMap<>();
 
+        // Zoek gebruiker op via email
         User user = userRepository.findByEmail(loginRequest.getEmail())
                 .orElse(null);
 
+        // Check of gebruiker bestaat en wachtwoord klopt
         if (user == null || !passwordEncoder.matches(loginRequest.getWachtwoord(), user.getWachtwoord())) {
             response.put("success", false);
             response.put("message", "Ongeldige inloggegevens");
             return response;
         }
 
+        // Login succesvol
         response.put("success", true);
         response.put("message", "Login succesvol");
         response.put("rol", user.getRol());

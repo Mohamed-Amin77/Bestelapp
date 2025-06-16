@@ -15,27 +15,27 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private CustomUserDetailsService userDetailsService; // Haalt gebruikersgegevens uit de database
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // CSRF-bescherming tijdelijk uitgeschakeld (alleen voor testen)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/dashboard").hasRole("ADMIN")
-                        .requestMatchers("/home").hasAnyRole("TECHNIEKER", "MAGAZIJNIER")
-                        .requestMatchers("/api/**").authenticated()
-                        .requestMatchers("/api/users/**").hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                        .requestMatchers("/dashboard").hasRole("ADMIN") // Alleen ADMIN mag dashboard bekijken
+                        .requestMatchers("/home").hasAnyRole("TECHNIEKER", "MAGAZIJNIER") // TECHNIEKER en MAGAZIJNIER mogen home zien
+                        .requestMatchers("/api/**").authenticated() // Alle API's vereisen login
+                        .requestMatchers("/api/users/**").hasRole("ADMIN") // Alleen ADMIN kan gebruikers-API gebruiken
+                        .anyRequest().permitAll() // pagina's vrij toegankelijk
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/redirect", true)
-                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/redirect", true) // Na login doorverwijzen op basis van rol
+                        .failureUrl("/login?error=true") // Bij foutief inloggen terug naar login met foutmelding
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/login")
+                        .logoutSuccessUrl("/login") // Na uitloggen terug naar loginpagina
                         .permitAll()
                 );
 
@@ -44,15 +44,17 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+
         AuthenticationManagerBuilder authBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         authBuilder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
+                .passwordEncoder(passwordEncoder()); // Versleutel wachtwoorden met BCrypt
         return authBuilder.build();
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // BCrypt wachtwoord versleutelaar maken
         return new BCryptPasswordEncoder();
     }
 }
