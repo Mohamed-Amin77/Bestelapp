@@ -2,9 +2,10 @@ package com.ehb.bestelapp.controller;
 
 import com.ehb.bestelapp.model.User;
 import com.ehb.bestelapp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Alle gebruikers opvragen
     @GetMapping
@@ -31,6 +35,16 @@ public class UserController {
     // Nieuwe gebruiker toevoegen
     @PostMapping
     public User create(@Valid @RequestBody User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException("Email is al in gebruik");
+        }
+
+        user.setWachtwoord(passwordEncoder.encode(user.getWachtwoord()));
+
+        if (user.getRol() == null || user.getRol().isBlank()) {
+            user.setRol("TECHNIEKER");
+        }
+
         return userRepository.save(user);
     }
 
@@ -40,11 +54,16 @@ public class UserController {
         return userRepository.findById(id).map(u -> {
             u.setNaam(updated.getNaam());
             u.setEmail(updated.getEmail());
-            u.setWachtwoord(updated.getWachtwoord());
+
+            if (!updated.getWachtwoord().isBlank()) {
+                u.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
+            }
+
             u.setRol(updated.getRol());
             return userRepository.save(u);
         }).orElseGet(() -> {
             updated.setId(id);
+            updated.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
             return userRepository.save(updated);
         });
     }
