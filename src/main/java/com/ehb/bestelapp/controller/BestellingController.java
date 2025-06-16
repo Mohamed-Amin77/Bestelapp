@@ -5,6 +5,7 @@ import com.ehb.bestelapp.repository.BestellingRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,4 +56,12 @@ public class BestellingController {
     public void delete(@PathVariable Long id) {
         bestellingRepository.deleteById(id);
     }
+
+    // Alleen eigen bestellingen (voor ingelogde technieker)
+    @GetMapping("/mijn")
+    public List<Bestelling> getEigenBestellingen(Authentication auth) {
+        String email = auth.getName(); // haalt de e-mail op van de ingelogde gebruiker
+        return bestellingRepository.findByTechniekerEmail(email);
+    }
+
 }
