@@ -31,6 +31,8 @@ public class BestellingController {
     // Nieuwe bestelling toevoegen
     @PostMapping
     public Bestelling create(@Valid @RequestBody Bestelling bestelling) {
+        // Status standaard naar AANGEMAAKT
+        bestelling.setStatus("AANGEMAAKT");
         return bestellingRepository.save(bestelling);
     }
 
@@ -39,7 +41,7 @@ public class BestellingController {
     public Bestelling update(@PathVariable Long id, @Valid @RequestBody Bestelling updated) {
         return bestellingRepository.findById(id).map(b -> {
             b.setDatum(updated.getDatum());
-            b.setOmschrijving(updated.getOmschrijving());
+            b.setStatus(updated.getStatus());
             b.setTechnieker(updated.getTechnieker());
             return bestellingRepository.save(b);
         }).orElseGet(() -> {

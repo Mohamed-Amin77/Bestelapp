@@ -19,6 +19,8 @@ public class Bestelling {
 
     @NotNull(message = "Technieker is verplicht")
     private Long technieker;
+    private String status;
+
 
     public Bestelling() {
     }
@@ -61,5 +63,12 @@ public class Bestelling {
 
     public void setTechnieker(Long technieker) {
         this.technieker = technieker;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
