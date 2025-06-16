@@ -22,6 +22,10 @@
     </nav>
 </header>
 
+<!-- Succes- of foutmeldingen -->
+<p th:if="${successMessage}" th:text="${successMessage}" class="success-message"></p>
+<p th:if="${errorMessage}" th:text="${errorMessage}" class="error-message"></p>
+
 
 <main class="materiaal-toevoegen-container">
     <h1>Nieuw Materiaal Toevoegen</h1>
