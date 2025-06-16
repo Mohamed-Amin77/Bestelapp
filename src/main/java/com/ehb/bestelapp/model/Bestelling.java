@@ -1,11 +1,11 @@
-
-        package com.ehb.bestelapp.model;
+package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "bestellingen")
 public class Bestelling {
 
     @Id
@@ -18,20 +18,14 @@ public class Bestelling {
     @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
-<<<<<<< HEAD
-    // Technieker als relatie naar User in plaats van alleen een Long id
+    // Technieker is nu een echte relatie naar User
     @ManyToOne(optional = false)
-    @JoinColumn(name = "technieker_id")
+    @JoinColumn(name = "technieker_id", nullable = false)
     private User technieker;
-=======
-    @NotNull(message = "Technieker is verplicht")
-    private Long technieker;
+
     private String status;
+
     private String leverdatum;
-
->>>>>>> 7561452d70749d63b565b718ae0d6f04294c3efc
-
-    private String status;
 
     public Bestelling() {
     }
@@ -42,16 +36,7 @@ public class Bestelling {
         this.technieker = technieker;
     }
 
-    // GETTERS EN SETTERS
-
-
-    public String getLeverdatum() {
-        return leverdatum;
-    }
-
-    public void setLeverdatum(String leverdatum) {
-        this.leverdatum = leverdatum;
-    }
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;
@@ -91,5 +76,13 @@ public class Bestelling {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLeverdatum() {
+        return leverdatum;
+    }
+
+    public void setLeverdatum(String leverdatum) {
+        this.leverdatum = leverdatum;
     }
 }
