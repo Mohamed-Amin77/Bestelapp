@@ -37,6 +37,7 @@ ul {
     margin: 0;
 }
 
+<<<<<<< Updated upstream:src/main/resources/static/css/style.css
 li {
     list-style: none;
 }
@@ -109,6 +110,11 @@ a:hover {
 button,
 .functie {
     background-color: #1e40af;
+=======
+
+button {
+    background-color: black;
+>>>>>>> Stashed changes:src/main/resources/static/css/Admin/global.css
     color: white;
     border: none;
     padding: 10px 20px;
@@ -142,6 +148,7 @@ button:hover,
     background-color: #3e8e41;
 }
 
+<<<<<<< Updated upstream:src/main/resources/static/css/style.css
 /* Materialen-kaarten */
 .kaartjes,
 .materiaal {
@@ -188,3 +195,24 @@ td, th {
 tr:nth-child(even) {
     background-color: #f0f0f0;
 }
+=======
+.submit-btn {
+    margin-top: 25px;
+}
+
+.link-tb{
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
+
+.link-tb:hover{
+    text-decoration: underline;
+}
+
+h3, h2{
+    display: flex;
+    justify-content: center;
+}
+>>>>>>> Stashed changes:src/main/resources/static/css/Admin/global.css

@@ -1,28 +1,34 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medewerker bewerken</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/admin/layout-edit-medewerker.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/global.css}">
 </head>
 <body>
+
 <header>
     <nav>
-        <img src="" alt="logo">
+        <div class="logo">
+            <img src="/img/logo.png" alt="Logo">
+        </div>
         <ul>
-            <li><a href="index2.html">Home</a></li>
-            <li><a href="#">Account</a></li>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/account}">Account</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="container-fonction">
     <button onclick="history.back()">Terug</button>
+
     <div class="container">
         <div class="persoon">
-            <form action="/medewerker/update" method="post">
+            <form th:action="@{/medewerker/update}" method="post">
                 <h2>Medewerker bewerken</h2>
+
                 <table>
                     <tr>
                         <th>ID</th>
@@ -30,15 +36,17 @@
                         <th>Voornaam</th>
                     </tr>
                     <tr>
-                        <td><input type="text" name="id" value="123" readonly></td>
-                        <td><input type="text" name="naam" value="Jansen" required></td>
-                        <td><input type="text" name="voornaam" value="Pieter" required></td>
+                        <td><input type="text" name="id" th:value="${medewerker.id}" readonly></td>
+                        <td><input type="text" name="naam" th:value="${medewerker.naam}" required></td>
+                        <td><input type="text" name="voornaam" th:value="${medewerker.voornaam}" required></td>
                     </tr>
                 </table>
+
                 <button type="submit" class="submit-btn">Opslaan</button>
             </form>
         </div>
     </div>
 </div>
+
 </body>
 </html>
