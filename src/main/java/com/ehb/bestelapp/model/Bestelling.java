@@ -1,11 +1,14 @@
-
-        package com.ehb.bestelapp.model;
+package com.ehb.bestelapp.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.cglib.core.Local;
 
 @Entity
+@Table(name = "bestellingen")
 public class Bestelling {
 
     @Id
@@ -13,44 +16,29 @@ public class Bestelling {
     private Long id;
 
     @NotNull(message = "Datum is verplicht")
-    private String datum;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate datum;
 
     @NotBlank(message = "Omschrijving is verplicht")
     private String omschrijving;
 
-<<<<<<< HEAD
-    // Technieker als relatie naar User in plaats van alleen een Long id
+    //Technieker is nu een echte relatie naar User
     @ManyToOne(optional = false)
-    @JoinColumn(name = "technieker_id")
+    @JoinColumn(name = "technieker_id", nullable = false)
     private User technieker;
-=======
-    @NotNull(message = "Technieker is verplicht")
-    private Long technieker;
-    private String status;
-    private String leverdatum;
-
->>>>>>> 7561452d70749d63b565b718ae0d6f04294c3efc
 
     private String status;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate leverdatum;
 
     public Bestelling() {
     }
 
-    public Bestelling(String datum, String omschrijving, User technieker) {
+    public Bestelling(LocalDate datum, String omschrijving, User technieker) {
         this.datum = datum;
         this.omschrijving = omschrijving;
         this.technieker = technieker;
-    }
-
-    // GETTERS EN SETTERS
-
-
-    public String getLeverdatum() {
-        return leverdatum;
-    }
-
-    public void setLeverdatum(String leverdatum) {
-        this.leverdatum = leverdatum;
     }
 
     public Long getId() {
@@ -61,11 +49,11 @@ public class Bestelling {
         this.id = id;
     }
 
-    public String getDatum() {
+    public LocalDate getDatum() {
         return datum;
     }
 
-    public void setDatum(String datum) {
+    public void setDatum(LocalDate datum) {
         this.datum = datum;
     }
 
@@ -91,5 +79,13 @@ public class Bestelling {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public LocalDate getLeverdatum() {
+        return leverdatum;
+    }
+
+    public void setLeverdatum(LocalDate leverdatum) {
+        this.leverdatum = leverdatum;
     }
 }
