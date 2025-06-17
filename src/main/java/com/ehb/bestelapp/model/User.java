@@ -26,7 +26,12 @@ public class User {
     @Size(min = 6, message = "Wachtwoord moet minstens 6 tekens bevatten")
     private String wachtwoord;
 
-    private boolean rol = false; // admin, technieker
+    // Rol kan TRUE zijn voor admin/magazijnier en FALSE voor gewone gebruiker
+    private boolean rol = false;
+
+    // Nieuw veld: gebruikerstype (optioneel - alternatief voor boolean)
+    // Bijvoorbeeld: "admin", "gebruiker", "magazijnier"
+    private String type;
 
     public User() {}
 
@@ -78,5 +83,11 @@ public class User {
         this.rol = rol;
     }
 
+    public String getType() {
+        return type;
+    }
 
+    public void setType(String type) {
+        this.type = type;
+    }
 }
