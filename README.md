@@ -66,7 +66,7 @@ Een Spring Boot–webapplicatie voor het beheren van bestellingen en materialen,
 
 ---
 
-## Sources
+## Bronnen
 
 - **Grok Chat**: [Grok Chat 1](https://grok.com/chat/16799547-c783-44f1-8a96-46d5c74b616a) .
 - **Blackbox AI Chat**: [Blackbox Chat 1](https://www.blackbox.ai/chat/WaUEikH) .
