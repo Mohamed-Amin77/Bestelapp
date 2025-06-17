@@ -95,6 +95,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.42</version>
+        </dependency>
+
     </dependencies>
 
     <build>
