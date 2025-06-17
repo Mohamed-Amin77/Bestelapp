@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "bestellingen")
 public class Bestelling {
@@ -46,12 +48,12 @@ public class Bestelling {
         this.id = id;
     }
 
-    public String getDatum() {
-        return datum;
+    public LocalDate getDatum() {
+        return LocalDate.parse(datum);
     }
 
-    public void setDatum(String datum) {
-        this.datum = datum;
+    public void setDatum(LocalDate datum) {
+        this.datum = datum.toString();
     }
 
     public String getOmschrijving() {
