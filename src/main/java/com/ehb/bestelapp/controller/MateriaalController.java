@@ -24,39 +24,46 @@ public class MateriaalController {
 
     // Specifiek materiaal opvragen
     @GetMapping("/{id}")
-    public Optional<Materiaal> getById(@PathVariable Long id) {
-        return materiaalRepository.findById(id);
+    public Materiaal getMateriaalById(@PathVariable Long id) {
+        return materiaalRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
     }
 
     // Nieuw materiaal toevoegen
     @PostMapping
-    public Materiaal create(@Valid @RequestBody Materiaal materiaal) {
+    public Materiaal createMateriaal(@Valid @RequestBody Materiaal materiaal) {
         return materiaalRepository.save(materiaal);
     }
 
     // Materiaal bijwerken (categorie toevoegen)
     @PutMapping("/{id}")
-    public Materiaal update(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
+    public Materiaal updateMateriaal(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
         return materiaalRepository.findById(id).map(m -> {
             m.setNaam(updated.getNaam());
             m.setAantal(updated.getAantal());
             m.setCategorie(updated.getCategorie());
             return materiaalRepository.save(m);
-        }).orElseGet(() -> {
-            updated.setId(id);
-            return materiaalRepository.save(updated);
-        });
+        }).orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
     }
 
     // Materiaal verwijderen
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void deleteMateriaal(@PathVariable Long id) {
+        if(!materiaalRepository.existsById(id)){
+            throw new RuntimeException("Materiaal met id: " + id + " niet gevonden");
+        }
         materiaalRepository.deleteById(id);
     }
 
-    // Nieuw toegevoegd: filteren op categorie
-    @GetMapping("/categorie/{categorie}")
-    public List<Materiaal> getByCategorie(@PathVariable String categorie) {
-        return materiaalRepository.findByCategorie(categorie);
+    @DeleteMapping("/all")
+    public void deleteAll(){
+        materiaalRepository.deleteAll();
     }
+
+
+//    // Nieuw toegevoegd: filteren op categorie
+//    @GetMapping("/categorie/{categorie}")
+//    public List<Materiaal> getByCategorie(@PathVariable String categorie) {
+//        return materiaalRepository.findByCategorie(categorie);
+//    }
 }
