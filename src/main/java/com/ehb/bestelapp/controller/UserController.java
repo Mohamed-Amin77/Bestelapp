@@ -17,8 +17,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // Alle gebruikers opvragen
     @GetMapping
@@ -35,11 +35,15 @@ public class UserController {
     // Nieuwe gebruiker toevoegen
     @PostMapping
     public User create(@Valid @RequestBody User user) {
-//        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-//            throw new RuntimeException("Email is al in gebruik");
-//        }
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new RuntimeException("Email is al in gebruik");
+        }
 
-//        user.setWachtwoord(passwordEncoder.encode(user.getWachtwoord()));
+        user.setWachtwoord(passwordEncoder.encode(user.getWachtwoord()));
+
+        if (user.getRol() == null || user.getRol().isBlank()) {
+            user.setRol("TECHNIEKER");
+        }
 
         return userRepository.save(user);
     }
@@ -52,16 +56,16 @@ public class UserController {
             u.setEmail(updated.getEmail());
 
             if (!updated.getWachtwoord().isBlank()) {
-//                u.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
+                u.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
             }
 
-            //u.setRol(updated.getRol());
+            u.setRol(updated.getRol());
             return userRepository.save(u);
 
-            // Als er geen gebruiker met dat ID is, wordt er een nieuwe gebruiker aangemaakt met die ID
+        // Als er geen gebruiker met dat ID is, wordt er een nieuwe gebruiker aangemaakt met die ID
         }).orElseGet(() -> {
             updated.setId(id);
-//            updated.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
+            updated.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
             return userRepository.save(updated);
         });
     }

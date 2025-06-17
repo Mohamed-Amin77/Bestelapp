@@ -21,7 +21,6 @@ public class Materiaal {
     private Integer aantal;
 
     @NotBlank(message = "Categorie is verplicht")
-    @Enumerated(EnumType.STRING)
     private String categorie;
 
     // Constructors
