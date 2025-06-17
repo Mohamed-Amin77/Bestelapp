@@ -26,11 +26,11 @@ public class User {
     @Size(min = 6, message = "Wachtwoord moet minstens 6 tekens bevatten")
     private String wachtwoord;
 
-    private String rol; // admin, technieker
+    private boolean rol = false; // admin, technieker
 
     public User() {}
 
-    public User(String naam, String email, String wachtwoord, String rol) {
+    public User(String naam, String email, String wachtwoord, boolean rol) {
         this.naam = naam;
         this.email = email;
         this.wachtwoord = wachtwoord;
@@ -70,11 +70,11 @@ public class User {
         this.wachtwoord = wachtwoord;
     }
 
-    public String getRol() {
+    public boolean getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(boolean rol) {
         this.rol = rol;
     }
 
