@@ -26,7 +26,6 @@ public class User {
     @Size(min = 6, message = "Wachtwoord moet minstens 6 tekens bevatten")
     private String wachtwoord;
 
-    @NotBlank(message = "Rol is verplicht")
     private String rol; // admin, technieker
 
     public User() {}
