@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface WinkelmandRepository extends JpaRepository<Winkelmand, Long> {
     List<Winkelmand> findByTechnieker(User technieker);
-    void deleteByTechnieker(User technieker);
+    void deleteAllByTechnieker(User technieker);
 }
