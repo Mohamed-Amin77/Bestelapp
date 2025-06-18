@@ -1,5 +1,6 @@
 package com.ehb.bestelapp.repository;
 
+import com.ehb.bestelapp.model.Categorie;
 import com.ehb.bestelapp.model.Materiaal;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,5 @@ public interface MateriaalRepository extends JpaRepository<Materiaal, Long> {
 
     // Extra methode die Spring automatisch implementeert:
     // Haal alle materialen op die behoren tot een bepaalde categorie.
-    List<Materiaal> findByCategorie(String categorie);
+    List<Materiaal> findByCategorie(Categorie categorie);
 }
