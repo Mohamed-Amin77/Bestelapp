@@ -1,11 +1,10 @@
 package com.ehb.bestelapp.model;
 
-import com.ehb.bestelapp.repository.MateriaalRepository;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 
 @Entity
-@Table(name = "winkelmanden")
+@Table(name = "winkelmand")
 public class Winkelmand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
