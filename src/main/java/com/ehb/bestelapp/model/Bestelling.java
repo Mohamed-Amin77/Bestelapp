@@ -1,5 +1,6 @@
 package com.ehb.bestelapp.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,10 +16,12 @@ public class Bestelling {
     private Long id;
 
     @NotNull(message = "Datum is verplicht")
-    private String datum;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate datum;
 
-    @NotBlank(message = "Omschrijving is verplicht")
-    private String omschrijving;
+    //    @NotBlank(message = "Omschrijving is verplicht")
+//    private String omschrijving;
+
 
     // Technieker is nu een echte relatie naar User
     @ManyToOne(optional = false)
@@ -27,14 +30,15 @@ public class Bestelling {
 
     private String status;
 
-    private String leverdatum;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate leverdatum;
 
     public Bestelling() {
     }
 
-    public Bestelling(String datum, String omschrijving, User technieker) {
+    public Bestelling(LocalDate datum, String omschrijving, User technieker) {
         this.datum = datum;
-        this.omschrijving = omschrijving;
+//        this.omschrijving = omschrijving;
         this.technieker = technieker;
     }
 
@@ -49,20 +53,20 @@ public class Bestelling {
     }
 
     public LocalDate getDatum() {
-        return LocalDate.parse(datum);
+        return datum;
     }
 
     public void setDatum(LocalDate datum) {
-        this.datum = datum.toString();
+        this.datum = datum;
     }
 
-    public String getOmschrijving() {
-        return omschrijving;
-    }
-
-    public void setOmschrijving(String omschrijving) {
-        this.omschrijving = omschrijving;
-    }
+    //    public String getOmschrijving() {
+//        return omschrijving;
+//    }
+//
+//    public void setOmschrijving(String omschrijving) {
+//        this.omschrijving = omschrijving;
+//    }
 
     public User getTechnieker() {
         return technieker;
@@ -80,11 +84,11 @@ public class Bestelling {
         this.status = status;
     }
 
-    public String getLeverdatum() {
+    public LocalDate getLeverdatum() {
         return leverdatum;
     }
 
-    public void setLeverdatum(String leverdatum) {
+    public void setLeverdatum(LocalDate leverdatum) {
         this.leverdatum = leverdatum;
     }
 }
