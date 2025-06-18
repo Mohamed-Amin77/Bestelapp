@@ -2,95 +2,100 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/admin%20css/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alle Materiaal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
+<!--  Navbar Fragment -->
+<div th:replace="fragments/nav-magazijnier :: navbar"></div>
 
-<!-- Header met navigatie -->
-<header class="site-header">
-    <div class="logo">
-        <img src="logo.png" alt="Logo">
-    </div>
-    <nav class="navigatie">
-        <a href="#">Home</a>
-        <a href="#">Materiaal toevoegen</a>
-        <a href="#">Alle bestellingen</a>
-        <a href="#">Winkelmandje</a>
-        <a href="#">Login</a>
-    </nav>
-</header>
-
-<!-- Filters -->
-<div class="zoekbalk-en-filter-container">
-    <div class="zoekbalk">
-        <input type="text" placeholder="Zoek iets...">
-        <button>Zoek</button>
+<!--  Pagina-inhoud -->
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Alle Materialen</h1>
+        <a th:href="@{/magazijnier/add-materiaal}" class="btn btn-success">Nieuw Materiaal Toevoegen</a>
     </div>
 
-    <div class="filter">
-        <select>
-            <option value="">-- Kies een filter --</option>
-            <option value="optie1">Optie 1</option>
-            <option value="optie2">Optie 2</option>
-            <option value="optie3">Optie 3</option>
-            <option value="optie4">Optie 4</option>
-        </select>
+    <!--  Zoek & Filter -->
+    <form method="get" class="row mb-4">
+        <div class="col-md-6 mb-2">
+            <input type="text" name="zoekterm" class="form-control" placeholder="Zoek op naam, code of omschrijving...">
+        </div>
+        <div class="col-md-4 mb-2">
+            <select name="categorie" class="form-select">
+                <option value="">-- Filter op categorie --</option>
+                <option value="BEVESTIGINGSMATERIAAL">Bevestigingsmateriaal</option>
+                <option value="PBM">PBM</option>
+                <option value="GEREEDSCHAP">Gereedschap</option>
+                <option value="TECHNISCHE_ONDERHOUDSMATERIALEN">Technische onderhoudsmaterialen</option>
+                <option value="SPECIFIEKE_AQUAFIN_RIOLERINGSGERELATEERDE_TOOLS">Specifieke Aquafin-rioleringsgerelateerde tools</option>
+                <option value="DIVERSE_VERBRUIKSGOEDEREN">Diverse verbruiksgoederen</option>
+            </select>
+        </div>
+        <div class="col-md-2 mb-2">
+            <button type="submit" class="btn btn-primary w-100">Zoek</button>
+        </div>
+    </form>
+
+    <!--  Tabel -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-bordered table-striped align-middle text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>Productnaam</th>
+                    <th>Categorie</th>
+                    <th>Productcode</th>
+                    <th>Omschrijving</th>
+                    <th>Voorraad</th>
+                    <th>Afbeelding</th>
+                    <th>Acties</th>
+                </tr>
+                </thead>
+                <tbody th:if="${#lists.isEmpty(materialen)}">
+                <tr>
+                    <td colspan="7" class="text-muted">Geen materialen gevonden.</td>
+                </tr>
+                </tbody>
+                <tbody th:each="materiaal : ${materialen}">
+                <tr>
+                    <td th:text="${materiaal.naam}">Naam</td>
+                    <td th:switch="${materiaal.categorie}">
+                        <span th:case="'BEVESTIGINGSMATERIAAL'">Bevestigingsmateriaal</span>
+                        <span th:case="'PBM'">PBM</span>
+                        <span th:case="'GEREEDSCHAP'">Gereedschap</span>
+                        <span th:case="'TECHNISCHE_ONDERHOUDSMATERIALEN'">Technische onderhoudsmaterialen</span>
+                        <span th:case="'SPECIFIEKE_AQUAFIN_RIOLERINGSGERELATEERDE_TOOLS'">Specifieke Aquafin-rioleringsgerelateerde tools</span>
+                        <span th:case="'DIVERSE_VERBRUIKSGOEDEREN'">Diverse verbruiksgoederen</span>
+                        <span th:case="*">Onbekend</span>
+                    </td>
+                    <td th:text="${materiaal.code}">Code</td>
+                    <td th:text="${materiaal.omschrijving}">Omschrijving</td>
+                    <td th:text="${materiaal.voorraad}">0</td>
+                    <td>
+                        <a th:href="@{${materiaal.afbeelding}}" target="_blank" class="btn btn-sm btn-outline-secondary">Bekijk</a>
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a th:href="@{'/magazijnier/edit-materiaal/' + ${materiaal.id}}" class="btn btn-sm btn-warning">Bewerken</a>
+                            <form th:action="@{'/magazijnier/delete-materiaal/' + ${materiaal.id}}"
+                                  method="post"
+                                  onsubmit="return confirm('Weet je zeker dat je dit materiaal wilt verwijderen?');">
+                                <button type="submit" class="btn btn-sm btn-danger">Verwijderen</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<!-- Nieuw materiaal toevoegen -->
-<div class="toevoegen-knop-container">
-    <a th:href="@{/magazijnier/add-materiaal}" class="toevoegen-knop">Nieuw Materiaal Toevoegen</a>
-</div>
-
-
-<!-- Materialentabel -->
-<div class="materialen-container">
-    <h2>Alle Materialen</h2>
-    <hr>
-
-    <table class="materialen-tabel">
-        <thead>
-        <tr>
-            <th>Productnaam</th>
-            <th>Categorie</th>
-            <th>Productcode</th>
-            <th>Omschrijving</th>
-            <th>Voorraad</th>
-            <th>Afbeelding</th>
-            <th>Acties</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="materiaal : ${materialen}">
-            <td th:text="${materiaal.naam}">Naam</td>
-            <td th:text="${materiaal.categorie}">Categorie</td>
-            <td th:text="${materiaal.code}">Code</td>
-            <td th:text="${materiaal.omschrijving}">Omschrijving</td>
-            <td th:text="${materiaal.voorraad}">0</td>
-            <td><a th:href="@{${materiaal.afbeelding}}" target="_blank">PNG</a></td>
-            <td>
-                <a th:href="@{'/magazijnier/edit-materiaal/' + ${materiaal.id}}" class="bewerk-knop">Bewerken</a>
-
-                <form th:action="@{'/magazijnier/delete-materiaal/' + ${materiaal.id}}"
-                      method="post"
-                      style="display:inline;"
-                      onsubmit="return confirm('Weet je zeker dat je dit materiaal wilt verwijderen?');">
-
-                    <button type="submit" class="verwijder-knop">Verwijderen</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-
-
-
-
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

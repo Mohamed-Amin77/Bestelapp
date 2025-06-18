@@ -2,78 +2,84 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/admin%20css/global.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alle Bestellingen</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 
-<!-- Header met navigatie -->
-<header class="site-header">
-    <div class="logo">
-        <img src="logo.png" alt="Logo">
-    </div>
-    <nav class="navigatie">
-        <a href="#">Home</a>
-        <a href="#">Materiaal toevoegen</a>
-        <a href="#">Alle bestellingen</a>
-        <a href="#">Winkelmandje</a>
-        <a href="#">Login</a>
-    </nav>
-</header>
+<!-- Navbar fragment -->
+<div th:replace="fragments/nav-magazijnier :: navbar"></div>
 
-<!-- Filters -->
-<div class="zoekbalk-en-filter-container">
-    <div class="zoekbalk">
-        <input type="text" placeholder="Zoek iets...">
-        <button>Zoek</button>
+<!-- Pagina-inhoud -->
+<div class="container mt-5">
+    <h1 class="mb-4">Overzicht van Alle Bestellingen</h1>
+
+    <!--  Zoekbalk en Filter -->
+    <div class="row mb-4">
+        <div class="col-md-6 mb-2">
+            <input type="text" class="form-control" placeholder="Zoek op personeel of bestelnummer...">
+        </div>
+        <div class="col-md-4 mb-2">
+            <select class="form-select">
+                <option value="">-- Filter op status --</option>
+                <option value="in_behandeling">In Behandeling</option>
+                <option value="verzonden">Verzonden</option>
+                <option value="geleverd">Geleverd</option>
+                <option value="geannuleerd">Geannuleerd</option>
+            </select>
+        </div>
+        <div class="col-md-2 mb-2">
+            <button class="btn btn-primary w-100">Zoek</button>
+        </div>
     </div>
 
-    <div class="filter">
-        <select>
-            <option value="">-- Kies een filter --</option>
-            <option value="optie1">Optie 1</option>
-            <option value="optie2">Optie 2</option>
-            <option value="optie3">Optie 3</option>
-            <option value="optie4">Optie 4</option>
-        </select>
+    <!-- Bestellingentabel -->
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped table-bordered align-middle text-center">
+                <thead class="table-dark">
+                <tr>
+                    <th>Personeel ID</th>
+                    <th>Bestelnummer</th>
+                    <th>Datum</th>
+                    <th>Producten</th>
+                    <th>Status</th>
+                    <th>Leverdatum</th>
+                    <th>Actie</th>
+                </tr>
+                </thead>
+                <tbody th:if="${#lists.isEmpty(bestellingen)}">
+                <tr>
+                    <td colspan="7" class="text-muted">Geen bestellingen gevonden.</td>
+                </tr>
+                </tbody>
+                <tbody th:each="bestelling : ${bestellingen}">
+                <tr>
+                    <td th:text="${bestelling.personeelId}">12345</td>
+                    <td th:text="'#ORD-' + ${bestelling.id}">#ORD-001</td>
+                    <td th:text="${#dates.format(bestelling.datum, 'dd-MM-yyyy')}">17-06-2025</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary">Bekijk</button>
+                    </td>
+                    <td>
+                        <span class="badge bg-warning text-dark" th:text="${bestelling.status}">Bezig</span>
+                    </td>
+                    <td th:text="${bestelling.leverdatum != null ? #dates.format(bestelling.leverdatum, 'dd-MM-yyyy') : '-'}">-</td>
+                    <td>
+                        <a th:href="@{/magazijnier/bestellingen/{id}(id=${bestelling.id})}" class="btn btn-sm btn-secondary">Details</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
-<!-- Hier komt de bestellingenlijst -->
-<div class="bestellingen-container">
-    <h2>Bestellingen</h2>
-    <hr>
-
-    <table class="bestellingen-tabel">
-        <thead>
-        <tr>
-            <th>Personeel ID</th>
-            <th>Bestelnummer</th>
-            <th>Datum</th>
-            <th>Producten</th>
-            <th>Status</th>
-            <th>Leverdatum</th>
-            <th>Actie</th>
-        </tr>
-        </thead>
-        <tbody> <!-- voor elke rij moet je mij ... tonen !-->
-        <tr th:each="bestelling : ${bestellingen}">
-            <td th:text="${bestelling.personeelId}">PersoneelID</td>
-            <td th:text="'#ORD-' + bestelling.id"></td>
-            <td th:text="${bestelling.datum}"></td>
-            <td><button class="product-button">Producten</button></td>
-            <td>Bezig</td>
-            <td>-</td>
-            <td><a href="#">Bekijk</a></td>
-        </tr>
-        </tbody>
-
-    </table>
-</div>
-
-
-
-
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>

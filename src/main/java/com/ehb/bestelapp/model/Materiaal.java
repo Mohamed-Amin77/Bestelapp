@@ -22,12 +22,12 @@ public class Materiaal {
 
     @NotBlank(message = "Categorie is verplicht")
     @Enumerated(EnumType.STRING)
-    private String categorie;
+    private Categorie categorie;
 
     // Constructors
     public Materiaal() {}
 
-    public Materiaal(String naam, Integer aantal, String categorie) {
+    public Materiaal(String naam, Integer aantal, Categorie categorie) {
         this.naam = naam;
         this.aantal = aantal;
         this.categorie = categorie;
@@ -58,11 +58,11 @@ public class Materiaal {
         this.aantal = aantal;
     }
 
-    public String getCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
-    public void setCategorie(String categorie) {
+    public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
 }
