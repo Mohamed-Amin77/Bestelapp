@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Materiaal Lijst</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<header class="bg-dark text-white p-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="/" class="text-white text-decoration-none"><h2>Aquafin.</h2></a>
+        <nav>
+            <a href="/materiaal/lijst" class="text-white me-3 text-decoration-none">Materiaal</a>
+            <a href="/bestellingen" class="text-white me-3 text-decoration-none">Bestellingen</a>
+            <a href="/incident" class="text-white text-decoration-none">Incident</a>
+            <a href="/contact" class="text-white text-decoration-none">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main class="flex-fill">
+    <div class="container mt-4">
+        <h1 class="mb-4">Beschikbaar Materiaal</h1>
+
+        <form method="get" action="/materiaal/lijst" class="mb-3">
+            <label for="categorie" class="form-label">Filter op categorie:</label>
+            <select class="form-select" id="categorie" name="categorie" onchange="this.form.submit()">
+                <option value="">-- Alles --</option>
+                <option th:each="cat : ${categorien}"
+                        th:value="${cat}"
+                        th:text="${#strings.capitalize(cat.name().toLowerCase().replace('_',' '))}"
+                        th:selected="${cat.name()} == ${selectedCategorie}">
+                </option>
+            </select>
+        </form>
+
+        <table class="table table-striped">
+            <thead class="table-dark">
+            <tr>
+                <th>Naam</th>
+                <th>Categorie</th>
+                <th>Voorraad</th>
+                <th>Actie</th>
+                <th th:if="${currentUser.rol.name() == 'ADMIN' or currentUser.rol.name() == 'MAGAZIJNIER'}">Beheer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="m : ${materiaalLijst}">
+                <td th:text="${m.naam}"></td>
+                <td th:text="${m.categorie}"></td>
+                <td th:text="${m.aantal}"></td>
+                <td>
+                    <form th:action="@{'/winkelmand/toevoegen/' + ${m.id}}" method="post" class="d-inline">
+                        <input type="hidden" name="aantal" value="1">
+                        <button type="submit" class="btn btn-sm btn-primary">Bestel</button>
+                    </form>
+                </td>
+                <td th:if="${currentUser.rol.name() == 'ADMIN' or currentUser.rol.name() == 'MAGAZIJNIER'}">
+                    <a th:href="@{'/materiaal/bewerken/' + ${m.id}}" class="btn btn-sm btn-warning me-1">Update</a>
+                    <form th:action="@{'/materiaal/verwijder/' + ${m.id}}" method="post" class="d-inline"
+                          onsubmit="return confirm('Ben je zeker dat je dit materiaal wilt verwijderen?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Verwijder</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="mb-3">
+            <a href="/winkelmand" class="btn btn-success">Naar winkelmand</a>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-dark text-white text-center p-2 mt-5">
+    &copy; 2025 Aquafin. All rights reserved.
+</footer>
+
+</body>
+</html>
