@@ -12,7 +12,5 @@ public interface BestellingRepository extends JpaRepository<Bestelling, Long> {
 
    List<Bestelling> findByTechnieker_Email(String email);
 
-   List<Bestelling> findByTechniekerEmail(String email);
-
    List<Bestelling> findByTechnieker(User user);
 }

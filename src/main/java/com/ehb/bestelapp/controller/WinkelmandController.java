@@ -9,11 +9,12 @@ import com.ehb.bestelapp.repository.UserRepository;
 import com.ehb.bestelapp.repository.WinkelmandRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/api/winkelmand")
 public class WinkelmandController {
 
@@ -68,7 +69,16 @@ public class WinkelmandController {
         winkelmandRepository.deleteAll();
     }
 
-    //A FAIRE: DELETE ALL ITEMS FROM A CART LINKED TO A USER
+    //For one specific user
+    @DeleteMapping("/user/{userId}")
+    public void deleteAllItemsFromUserCart(@PathVariable Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Gebruiker niet gevonden"));
+
+        List<Winkelmand> items = winkelmandRepository.findByTechnieker(user);
+        winkelmandRepository.deleteAll(items);
+    }
+
 
 
 

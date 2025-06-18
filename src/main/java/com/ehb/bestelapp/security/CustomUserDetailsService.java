@@ -22,8 +22,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Gebruiker niet gevonden: " + email);
         }
 
-        //To use for the Collections.singleton since the role is boolean
-        String roleName = gebruiker.getRol() ? "ROLE_ADMIN" : "ROLE_TECHNIEKER";
+        //To use for the Collections.singleton since the role is ENUM
+        String roleName = "ROLE_" + gebruiker.getRol().name();
 
         return new org.springframework.security.core.userdetails.User(
                 gebruiker.getEmail(),

@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "gebruikers", uniqueConstraints = {
         @UniqueConstraint(columnNames = "email")
@@ -26,16 +28,15 @@ public class User {
     @Size(min = 6, message = "Wachtwoord moet minstens 6 tekens bevatten")
     private String wachtwoord;
 
-    // Rol kan TRUE zijn voor admin/magazijnier en FALSE voor gewone gebruiker
-    private boolean rol = false;
+    @Enumerated(EnumType.STRING)
+    private Rol rol = Rol.TECHNIEKER; //default
 
-    // Nieuw veld: gebruikerstype (optioneel - alternatief voor boolean)
-    // Bijvoorbeeld: "admin", "gebruiker", "magazijnier"
-    private String type;
+    @OneToMany(mappedBy = "technieker", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Bestelling> bestellingen;
 
     public User() {}
 
-    public User(String naam, String email, String wachtwoord, boolean rol) {
+    public User(String naam, String email, String wachtwoord, Rol rol) {
         this.naam = naam;
         this.email = email;
         this.wachtwoord = wachtwoord;
@@ -75,19 +76,19 @@ public class User {
         this.wachtwoord = wachtwoord;
     }
 
-    public boolean getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(boolean rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 
-    public String getType() {
-        return type;
+    public List<Bestelling> getBestellingen() {
+        return bestellingen;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setBestellingen(List<Bestelling> bestellingen) {
+        this.bestellingen = bestellingen;
     }
 }

@@ -1,69 +1,140 @@
 package com.ehb.bestelapp.controller;
 
+import com.ehb.bestelapp.model.Categorie;
 import com.ehb.bestelapp.model.Materiaal;
+import com.ehb.bestelapp.model.User;
 import com.ehb.bestelapp.repository.MateriaalRepository;
+import com.ehb.bestelapp.repository.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
-@RestController
-@RequestMapping("/api/materiaal")
+
+@Controller
+@RequestMapping("/materiaal")
 public class MateriaalController {
 
     @Autowired
     private MateriaalRepository materiaalRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @GetMapping("/lijst")
+    public String toonMateriaalLijst(@RequestParam(required = false) String categorie, Model model, Principal principal) {
+        List<Materiaal> materiaalLijst;
 
-    // Alles opvragen
-    @GetMapping
-    public List<Materiaal> getAll() {
-        return materiaalRepository.findAll();
+        if (principal != null) { //for the conditional role -> Thymeleaf
+            String email = principal.getName();
+            User currentUser = userRepository.findByEmail(email);
+            model.addAttribute("currentUser", currentUser);
+        }
+
+        if (categorie != null && !categorie.isEmpty()) {
+            try {
+                Categorie selected = Categorie.valueOf(categorie);
+                materiaalLijst = materiaalRepository.findByCategorie(selected);
+                model.addAttribute("selectedCategorie", categorie);
+            } catch (IllegalArgumentException e) {
+                materiaalLijst = materiaalRepository.findAll(); // fallback if wrong category name
+            }
+        } else {
+            materiaalLijst = materiaalRepository.findAll();
+        }
+
+        model.addAttribute("materiaalLijst", materiaalLijst);
+        model.addAttribute("categorien", Categorie.values());
+
+        return "materiaal/lijst";
     }
 
-    // Specifiek materiaal opvragen
-    @GetMapping("/{id}")
-    public Materiaal getMateriaalById(@PathVariable Long id) {
-        return materiaalRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
+    @GetMapping("/bewerken/{id}")
+    public String toonBewerkFormulier(@PathVariable Long id, Model model) {
+        Materiaal materiaal = materiaalRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Id niet gevonden"));
+
+        model.addAttribute("materiaal", materiaal);
+        model.addAttribute("categorien", Categorie.values());
+        return "materiaal/bewerken";
+    }
+    @GetMapping("/nieuw")
+    public String toonNieuwMateriaalFormulier(Model model) {
+        model.addAttribute("materiaal", new Materiaal());
+        model.addAttribute("categorien", Categorie.values());
+        return "materiaal/nieuw";
+    }
+    @PostMapping("/nieuw")
+    public String voegMateriaalToe(@ModelAttribute Materiaal materiaal) {
+        materiaalRepository.save(materiaal);
+        return "redirect:/materiaal/lijst";
     }
 
-    // Nieuw materiaal toevoegen
-    @PostMapping
-    public Materiaal createMateriaal(@Valid @RequestBody Materiaal materiaal) {
-        return materiaalRepository.save(materiaal);
-    }
-
-    // Materiaal bijwerken (categorie toevoegen)
-    @PutMapping("/{id}")
-    public Materiaal updateMateriaal(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
-        return materiaalRepository.findById(id).map(m -> {
+    @PostMapping("/bewerken/{id}")
+    public String updateMateriaal(@PathVariable Long id, @ModelAttribute Materiaal updated) {
+        materiaalRepository.findById(id).map(m -> {
             m.setNaam(updated.getNaam());
             m.setAantal(updated.getAantal());
             m.setCategorie(updated.getCategorie());
             return materiaalRepository.save(m);
-        }).orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
+        }).orElseThrow(() -> new IllegalArgumentException("Materiaal-ID niet gevonden"));
+
+        return "redirect:/materiaal/lijst";
     }
 
-    // Materiaal verwijderen
-    @DeleteMapping("/{id}")
-    public void deleteMateriaal(@PathVariable Long id) {
-        if(!materiaalRepository.existsById(id)){
-            throw new RuntimeException("Materiaal met id: " + id + " niet gevonden");
-        }
+    @PostMapping("/verwijder/{id}")
+    public String deleteMateriaal(@PathVariable Long id) {
         materiaalRepository.deleteById(id);
+        return "redirect:/materiaal/lijst";
     }
 
-    @DeleteMapping("/all")
-    public void deleteAll(){
-        materiaalRepository.deleteAll();
-    }
-
-
-//    // Nieuw toegevoegd: filteren op categorie
-//    @GetMapping("/categorie/{categorie}")
-//    public List<Materiaal> getByCategorie(@PathVariable String categorie) {
-//        return materiaalRepository.findByCategorie(categorie);
+//    // Alles opvragen
+//    @GetMapping
+//    public List<Materiaal> getAll() {
+//        return materiaalRepository.findAll();
 //    }
+//
+//    // Specifiek materiaal opvragen
+//    @GetMapping("/{id}")
+//    public Materiaal getMateriaalById(@PathVariable Long id) {
+//        return materiaalRepository.findById(id)
+//                .orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
+//    }
+//
+//    // Nieuw materiaal toevoegen
+//    @PostMapping
+//    public Materiaal createMateriaal(@Valid @RequestBody Materiaal materiaal) {
+//        return materiaalRepository.save(materiaal);
+//    }
+//
+//    // Materiaal bijwerken (categorie toevoegen)
+//    @PutMapping("/{id}")
+//    public Materiaal updateMateriaal(@PathVariable Long id, @Valid @RequestBody Materiaal updated) {
+//        return materiaalRepository.findById(id).map(m -> {
+//            m.setNaam(updated.getNaam());
+//            m.setAantal(updated.getAantal());
+//            m.setCategorie(updated.getCategorie());
+//            return materiaalRepository.save(m);
+//        }).orElseThrow(() -> new RuntimeException("Materiaal met id: " + id + " niet gevonden"));
+//    }
+//
+//    // Materiaal verwijderen
+//    @DeleteMapping("/{id}")
+//    public void deleteMateriaal(@PathVariable Long id) {
+//        if(!materiaalRepository.existsById(id)){
+//            throw new RuntimeException("Materiaal met id: " + id + " niet gevonden");
+//        }
+//        materiaalRepository.deleteById(id);
+//    }
+//
+//    @DeleteMapping("/all")
+//    public void deleteAll(){
+//        materiaalRepository.deleteAll();
+//    }
+
+
 }

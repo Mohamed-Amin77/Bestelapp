@@ -20,7 +20,7 @@ public class Materiaal {
     @Min(value = 0, message = "Aantal moet 0 of meer zijn")
     private Integer aantal;
 
-    @NotBlank(message = "Categorie is verplicht")
+    @NotNull(message = "Categorie is verplicht")
     @Enumerated(EnumType.STRING)
     private Categorie categorie;
 
