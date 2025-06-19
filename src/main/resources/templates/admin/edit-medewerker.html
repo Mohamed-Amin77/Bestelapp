@@ -13,9 +13,15 @@
         <ul>
             <li><a href="index2.html">Home</a></li>
             <li><a href="#">Account</a></li>
+            <li>
+                <form th:action="@{/logout}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-outline-light">Uitloggen</button>
+                </form>
+            </li>
         </ul>
     </nav>
 </header>
+
 
 <div class="container-fonction">
     <button onclick="history.back()">Terug</button>

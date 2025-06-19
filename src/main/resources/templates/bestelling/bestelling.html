@@ -13,9 +13,10 @@
     <nav>
       <a href="/materiaal/lijst" class="text-white me-3 text-decoration-none">Materiaal</a>
       <a href="/bestellingen" class="text-white me-3 text-decoration-none">Bestellingen</a>
-      <a href="/incident" class="text-white text-decoration-none">Incident</a>
-      <a href="/contact" class="text-white text-decoration-none">Contact</a>
-    </nav>
+      <form th:action="@{/logout}" method="post" class="d-inline">
+        <button type="submit" class="btn btn-outline-light btn-sm">Uitloggen</button>
+      </form>
+
   </div>
 </header>
 

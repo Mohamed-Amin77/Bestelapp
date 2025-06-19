@@ -7,9 +7,13 @@
 <div th:fragment="navbar">
     <nav class="bg-blue-800 text-white px-6 py-4 flex justify-between items-center">
         <div class="text-xl font-semibold">Aquafin Magazijn</div>
-        <div>
-            <a th:href="@{/magazijnier/dashboard}" class="mr-4 hover:underline">Dashboard</a>
-            <a th:href="@{/logout}" class="hover:underline">Uitloggen</a>
+        <div class="flex gap-4 items-center">
+            <a th:href="@{/magazijnier/dashboard}" class="hover:underline">Dashboard</a>
+            <form th:action="@{/logout}" method="post" class="d-inline">
+                <button type="submit" class="bg-transparent border-none text-white hover:underline cursor-pointer p-0 m-0">
+                    Uitloggen
+                </button>
+            </form>
         </div>
     </nav>
 </div>
