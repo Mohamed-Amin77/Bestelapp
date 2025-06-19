@@ -9,7 +9,7 @@
 
 <header class="bg-dark text-white p-3">
     <div class="container d-flex justify-content-between align-items-center">
-        <a href="/" class="text-white text-decoration-none"><h2>Aquafin.</h2></a>
+        <a href="/" class="text-white text-decoration-none"><h2>Aquafin</h2></a>
         <nav>
             <a href="/materiaal/lijst" class="text-white me-3 text-decoration-none">Materiaal</a>
             <a href="/winkelmand" class="text-white me-3 text-decoration-none">Winkelmand</a>
@@ -43,7 +43,28 @@
                 <tr th:each="item : ${mandItems}">
                     <td th:text="${item.materiaal.naam}">Materiaalnaam</td>
                     <td th:text="${item.materiaal.categorie}">Categorie</td>
-                    <td th:text="${item.aantal}">Aantal</td>
+
+
+                    <td>
+                        <!-- Aantal knoppen met + en - -->
+                        <div class="input-group" style="max-width: 150px;">
+                            <button type="button"
+                                    class="btn btn-outline-secondary btn-sm"
+                                    th:onclick="'verlaagAantal(' + ${item.id} + ')'">-</button>
+                            <input type="number"
+                                   class="form-control text-center"
+                                   th:id="'aantal-' + ${item.id}"
+                                   th:value="${item.aantal}"
+                                   min="1"
+                                   style="max-width: 60px;"
+                                   th:onchange="'updateAantal(' + ${item.id} + ', this.value)'">
+                            <button type="button"
+                                    class="btn btn-outline-secondary btn-sm"
+                                    th:onclick="'verhoogAantal(' + ${item.id} + ')'">+</button>
+                        </div>
+                    </td>
+
+
                     <td>
                         <form th:action="@{'/winkelmand/verwijder/' + ${item.id}}" method="post">
                             <button type="submit" class="btn btn-sm btn-danger">Verwijder</button>
@@ -64,6 +85,49 @@
 <footer class="bg-dark text-white text-center p-2 mt-5">
     &copy; 2025 Aquafin. All rights reserved.
 </footer>
+
+<!-- JavaScript voor aantal knoppen -->
+<script>
+    function verhoogAantal(itemId) {
+        const aantalInput = document.getElementById('aantal-' + itemId);
+        const huidigeWaarde = parseInt(aantalInput.value);
+        aantalInput.value = huidigeWaarde + 1;
+        updateAantal(itemId, aantalInput.value);
+    }
+
+    function verlaagAantal(itemId) {
+        const aantalInput = document.getElementById('aantal-' + itemId);
+        const huidigeWaarde = parseInt(aantalInput.value);
+        if (huidigeWaarde > 1) {
+            aantalInput.value = huidigeWaarde - 1;
+            updateAantal(itemId, aantalInput.value);
+        }
+    }
+
+    function updateAantal(itemId, nieuweAantal) {
+        // AJAX request naar backend om aantal bij te werken
+        fetch('/api/winkelmand/' + itemId, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: itemId,
+                aantal: parseInt(nieuweAantal)
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Fout bij het bijwerken van aantal');
+                }
+                console.log('Aantal succesvol bijgewerkt naar: ' + nieuweAantal);
+            })
+            .catch(error => {
+                console.error('Fout:', error);
+                alert('Er is een fout opgetreden bij het bijwerken van het aantal');
+            });
+    }
+</script>
 
 </body>
 </html>
