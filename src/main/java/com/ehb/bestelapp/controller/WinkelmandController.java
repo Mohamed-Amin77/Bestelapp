@@ -1,6 +1,5 @@
 package com.ehb.bestelapp.controller;
 
-
 import com.ehb.bestelapp.model.Materiaal;
 import com.ehb.bestelapp.model.User;
 import com.ehb.bestelapp.model.Winkelmand;
@@ -10,6 +9,7 @@ import com.ehb.bestelapp.repository.WinkelmandRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,7 +63,6 @@ public class WinkelmandController {
         winkelmandRepository.deleteById(id);
     }
 
-
     @DeleteMapping("/all")
     public void deleteAll(){
         winkelmandRepository.deleteAll();
@@ -79,8 +78,12 @@ public class WinkelmandController {
         winkelmandRepository.deleteAll(items);
     }
 
-
-
-
+    // Extra endpoint om afleveradres te ontvangen
+    @PostMapping("/afrekenen")
+    public String kiesAfleveradres(@RequestParam("adres") String adres) {
+        // Hier kun je eventueel adres aan bestelling koppelen
+        System.out.println("Gekozen adres: " + adres); // tijdelijk zichtbaar in console
+        return "redirect:/bestellingen"; // doorsturen naar overzicht
+    }
 
 }
