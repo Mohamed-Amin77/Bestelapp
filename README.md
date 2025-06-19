@@ -56,6 +56,14 @@ Een Spring Boot–webapplicatie voor het beheren van bestellingen en materialen,
   - URL-toegang op basis van rol  
   - Bcrypt-wachtwoordhashing  
 
+## Database
+
+De databasedump bevindt zich in de map `/sql`. Elk bestand bevat een deel van het databankmodel:
+
+- `materiaalbeheer_gebruikers.sql`: bevat de gebruikers met rollen zoals admin, magazijnier...
+- `materiaalbeheer_materialen.sql`: beheert het aanbod materiaal
+- `materiaalbeheer_bestellingen.sql`: koppeling van gebruikers aan materiaal via bestellinge
+
 ---
 
 ##  Vereisten
