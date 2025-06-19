@@ -26,7 +26,9 @@ public class MateriaalController {
     @Autowired
     private UserRepository userRepository;
     @GetMapping("/lijst")
-    public String toonMateriaalLijst(@RequestParam(required = false) String categorie, Model model, Principal principal) {
+    public String toonMateriaalLijst(@RequestParam(required = false) String categorie,
+                                     @RequestParam(required = false) String zoekterm,
+                                     Model model, Principal principal) {
         List<Materiaal> materiaalLijst;
 
         if (principal != null) { //for the conditional role -> Thymeleaf
@@ -35,7 +37,16 @@ public class MateriaalController {
             model.addAttribute("currentUser", currentUser);
         }
 
-        if (categorie != null && !categorie.isEmpty()) {
+
+        // Eerst kijken we of er een zoekterm is
+        if (zoekterm != null && !zoekterm.trim().isEmpty()) {
+            // Zoeken op naam
+            materiaalLijst = materiaalRepository.findByNaamContainingIgnoreCase(zoekterm.trim());
+            model.addAttribute("zoekterm", zoekterm);
+        }
+        // Anders kijken we naar categorie filter
+        else if (categorie != null && !categorie.isEmpty()) {
+
             try {
                 Categorie selected = Categorie.valueOf(categorie);
                 materiaalLijst = materiaalRepository.findByCategorie(selected);

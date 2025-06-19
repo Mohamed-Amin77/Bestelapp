@@ -16,4 +16,7 @@ public interface MateriaalRepository extends JpaRepository<Materiaal, Long> {
     // Extra methode die Spring automatisch implementeert:
     // Haal alle materialen op die behoren tot een bepaalde categorie.
     List<Materiaal> findByCategorie(Categorie categorie);
+
+    // Nieuwe zoekmethode: vind materialen waar de naam de zoekterm bevat
+    List<Materiaal> findByNaamContainingIgnoreCase(String zoekterm);
 }

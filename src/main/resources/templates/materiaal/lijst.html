@@ -23,6 +23,23 @@
     <div class="container mt-4">
         <h1 class="mb-4">Beschikbaar Materiaal</h1>
 
+        <!-- Zoekbalk voor materiaal naam -->
+        <form method="get" action="/materiaal/lijst" class="mb-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="zoekterm" class="form-label">Zoek op materiaal naam:</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="zoekterm" name="zoekterm"
+                               th:value="${zoekterm}" placeholder="Voer materiaal naam in...">
+                        <button type="submit" class="btn btn-primary">Zoeken</button>
+                        <a href="/materiaal/lijst" class="btn btn-secondary">Reset</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Categorie filter -->
+
         <form method="get" action="/materiaal/lijst" class="mb-3">
             <label for="categorie" class="form-label">Filter op categorie:</label>
             <select class="form-select" id="categorie" name="categorie" onchange="this.form.submit()">
