@@ -18,7 +18,6 @@
                href="/bestellingen/all" class="text-white me-3 text-decoration-none">Bestellingen</a>
             <a th:if="${user != null and (user.rol.name() == 'ADMIN' or user.rol.name() == 'MAGAZIJNIER')}"
                href="/gebruikers/list" class="text-white me-3 text-decoration-none">Personeel</a>
-            <a href="/incident" class="text-white me-3 text-decoration-none">Incident</a>
             <a href="/contact" class="text-white me-3 text-decoration-none">Contact</a>
         </nav>
     </div>

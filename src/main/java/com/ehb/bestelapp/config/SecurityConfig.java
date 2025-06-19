@@ -1,5 +1,6 @@
 package com.ehb.bestelapp.config;
 
+import com.ehb.bestelapp.security.CustomSuccessHandler;
 import com.ehb.bestelapp.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,10 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
+    private CustomSuccessHandler customSuccessHandler;
+
+
+    @Autowired
     private CustomUserDetailsService userDetailsService; // Haalt gebruikersgegevens uit de database
 
     @Bean
@@ -30,7 +35,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
+                        .successHandler(customSuccessHandler)
                         .failureUrl("/?error=true")
                         .permitAll()
                 )
