@@ -160,46 +160,6 @@ De databasedump bevindt zich in de map `/database`. Elk bestand bevat een deel v
 Een volledig testplan met scenario's voor authenticatie, materiaalbeheer, bestellingen, validaties en usability is te vinden in het project onder docs.
 
 # Projectstructuur
-Bestelapp/
-├── .idea/
-├── .mvn/
-├── database/                         
-│   ├── materiaalbeheer_bestellingen.sql
-│   ├── materiaalbeheer_gebruikers.sql
-│   ├── materiaalbeheer_materialen.sql
-│   ├── materiaalbeheer_routines.sql
-│   └── materiaalbeheer_winkelmand.sql
-├── docs/                            
-│   ├── privacy.md                   
-│   └── testplan.md                 
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com.ehb.bestelapp/
-│       │       ├── config/
-│       │       ├── controller/
-│       │       ├── dto/
-│       │       ├── model/
-│       │       ├── repository/
-│       │       ├── security/
-│       │       └── BestelappApplication.java
-│       └── resources/
-│           ├── templates/
-│           │   ├── admin/
-│           │   ├── auth/
-│           │   ├── bestelling/
-│           │   ├── fragments/
-│           │   ├── gebruiker/
-│           │   │   ├── bewerken.html
-│           │   │   └── lijst.html
-│           │   ├── materiaal/
-│           │   │   ├── bewerken.html
-│           │   │   ├── lijst.html
-│           │   │   └── nieuw.html
-│           │   └── winkelmand/
-│           │       └── index.html
-│           └── application.properties
-├── target/
-├── .gitignore
-├── pom.xml
-└── README.md
+![image](https://github.com/user-attachments/assets/254ce2bc-606c-4e27-8302-ac5b219ef500)
+![image](https://github.com/user-attachments/assets/abf49213-a58a-434f-a74a-459eb3148a4a)
+
