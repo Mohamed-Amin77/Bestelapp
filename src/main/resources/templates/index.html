@@ -13,19 +13,11 @@
         <nav>
             <a href="/materiaal/lijst" class="text-white me-3 text-decoration-none">Materiaal</a>
             <a th:if="${user != null and user.rol.name() == 'TECHNIEKER'}"
-               href="/bestellingen"
-               class="text-white me-3 text-decoration-none">
-                Bestellingen
-            </a>
-
+               href="/bestellingen" class="text-white me-3 text-decoration-none">Bestellingen</a>
             <a th:if="${user != null and (user.rol.name() == 'ADMIN' or user.rol.name() == 'MAGAZIJNIER')}"
-               href="/bestellingen/all"
-               class="text-white me-3 text-decoration-none">
-                Bestellingen
-            </a>
+               href="/bestellingen/all" class="text-white me-3 text-decoration-none">Bestellingen</a>
             <a th:if="${user != null and (user.rol.name() == 'ADMIN' or user.rol.name() == 'MAGAZIJNIER')}"
                href="/gebruikers/list" class="text-white me-3 text-decoration-none">Personeel</a>
-
             <a href="/incident" class="text-white me-3 text-decoration-none">Incident</a>
             <a href="/contact" class="text-white me-3 text-decoration-none">Contact</a>
         </nav>
@@ -33,22 +25,19 @@
 </header>
 
 <main class="flex-fill">
-    <div class="container d-flex justify-content-center align-items-center min-vh-75">
+    <!-- Enkel tonen als user is ingelogd -->
+    <div th:if="${user != null}" class="container d-flex justify-content-center align-items-center min-vh-75">
         <div class="card shadow p-5" style="width: 100%; max-width: 600px;">
-            <div th:if="${user != null and user.rol.name() == 'TECHNIEKER'}">
-                <p class="text-dark me-3 text-center">
+            <div th:if="${user.rol.name() == 'TECHNIEKER'}">
+                <p class="text-dark text-center">
                     Deze applicatie is bedoeld voor medewerkers om materiaal aan te vragen en bestellingen te beheren.
                 </p>
-
                 <div class="text-center">
                     <a href="/materiaal/lijst" class="btn btn-primary btn-lg">Bestel Materiaal</a>
-
-                    <div th:if="${user == null}">
-                        <a href="/login" class="btn btn-outline-primary">Klik hier om in te loggen</a>
-                    </div>
                 </div>
             </div>
-            <div th:if="${user != null and (user.rol.name() == 'ADMIN' or user.rol.name() == 'MAGAZIJNIER')}">
+
+            <div th:if="${user.rol.name() == 'ADMIN' or user.rol.name() == 'MAGAZIJNIER'}">
                 <p class="text-muted mb-4 text-center">
                     Beheer paneel voor <b>administratieve</b> functies.
                 </p>
@@ -57,12 +46,40 @@
                         <a href="/auth/register" class="btn btn-primary btn-lg">Nieuw Personeel Toevoegen</a>
                         <a href="/gebruikers/list" class="btn btn-primary btn-lg">Alle Medewerkers</a>
                     </div>
-
                     <a href="/materiaal/nieuw" class="btn btn-primary btn-lg">Nieuw Materiaal Toevoegen</a>
                     <a href="/bestellingen/all" class="btn btn-primary btn-lg">Alle Bestellingen</a>
                     <a href="/materiaal/lijst" class="btn btn-primary btn-lg">Alle Materialen</a>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Inlogformulier tonen indien user NIET is ingelogd -->
+    <div th:if="${user == null}" class="container d-flex justify-content-center align-items-center" style="min-height: calc(100vh - 140px);">
+    <div class="card shadow p-4 mx-auto" style="width: 100%; max-width: 400px;">
+            <h2 class="text-center mb-4">Inloggen</h2>
+
+            <div th:if="${param.error}" class="alert alert-danger" role="alert">
+                Ongeldige e-mail of wachtwoord.
+            </div>
+
+            <div th:if="${param.logout}" class="alert alert-success" role="alert">
+                Je bent succesvol uitgelogd.
+            </div>
+
+            <form th:action="@{/login}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">E-mail</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Wachtwoord</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Inloggen</button>
+                </div>
+            </form>
         </div>
     </div>
 </main>
@@ -73,4 +90,3 @@
 
 </body>
 </html>
-
