@@ -33,7 +33,7 @@ public class UserController {
     public String showUserList(Model model) {
         List<User> users = userRepository.findAll();
         model.addAttribute("users", users);
-        return "gebruikers/lijst";
+        return "gebruiker/lijst";
     }
 
     @GetMapping("/bewerken/{id}")
@@ -41,7 +41,7 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Gebruiker niet gevonden"));
         model.addAttribute("user", user);
-        return "gebruikers/bewerken"; // e.g. templates/gebruikers/bewerken.html
+        return "gebruiker/bewerken"; // e.g. templates/gebruikers/bewerken.html
     }
 
     //Save user update

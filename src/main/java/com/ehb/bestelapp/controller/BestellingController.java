@@ -61,7 +61,7 @@ public class BestellingController {
 
         List<Bestelling> bestellingen = bestellingRepository.findAll();
         model.addAttribute("bestellingen", bestellingen);
-        return "bestelling/bestellingen_all";
+        return "bestelling/bestelling";
     }
 
 

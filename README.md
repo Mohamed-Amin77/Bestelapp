@@ -53,6 +53,7 @@ Git-repo met commits per functionaliteit en aparte mappen voor model, controller
 * [Bronnen en digitale hulpmiddelen](#-bronnen-en-digitale-hulpmiddelen)
 * [Contributie](#-contributie)
 * [Licentie](#-licentie)
+* * [Schermafbeeldingen](#-schermafbeeldingen)
 
 ## Technologieën
 
@@ -162,4 +163,50 @@ Een volledig testplan met scenario's voor authenticatie, materiaalbeheer, bestel
 # Projectstructuur
 ![image](https://github.com/user-attachments/assets/254ce2bc-606c-4e27-8302-ac5b219ef500)
 ![image](https://github.com/user-attachments/assets/abf49213-a58a-434f-a74a-459eb3148a4a)
+
+## Schermafbeeldingen
+
+### Admin-weergave
+
+**Homepagina**
+![Admin Homepagina](docs/images/Admin%20-%20Home%20pagina.png)
+
+**Alle medewerkers**
+![Admin Alle Medewerkers](docs/images/Admin%20-%20Alle%20Medewerkers%20pagina.png)
+
+**Gebruiker bewerken**
+![Admin Gebruiker Bewerken](docs/images/Admin%20-%20Gebruiker%20Bewerken%20pagina.png)
+
+**Nieuw personeelslid toevoegen**
+![Admin Nieuw Personeel](docs/images/Admin%20-%20Nieuwe%20personeelslid%20toevoegen%20pagina.png)
+
+---
+
+### Magazijnier-weergave
+
+**Homepagina**
+![Magazijnier Homepagina](docs/images/Magazijnier%20-%20Home%20pagina.png)
+
+**Bestellingen**
+![Magazijnier Bestellingen](docs/images/Magazijnier%20-%20Bestellingen%20pagina.png)
+
+**Materiaalpagina**
+![Magazijnier Materiaal](docs/images/Magazijnier%20-%20Materiaal%20pagina.png)
+
+**Materiaal toevoegen**
+![Magazijnier Materiaal Toevoegen](docs/images/Magazijnier%20-%20Materiaal%20Toevoegen%20pagina.png)
+
+---
+
+### Technieker-weergave
+
+**Materiaalpagina**
+![Technieker Materiaalpagina](docs/images/Technieker%20-%20Materiaal%20pagina.png)
+
+**Winkelmand**
+![Technieker Winkelmand](docs/images/Technieker%20-%20Winkelmand%20pagina.png)
+
+**Bestellingen**
+![Technieker Bestellingen](docs/images/Technieker%20-%20Bestelling%20pagina.png)
+
 
