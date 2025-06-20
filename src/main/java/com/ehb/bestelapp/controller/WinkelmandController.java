@@ -8,13 +8,14 @@ import com.ehb.bestelapp.repository.UserRepository;
 import com.ehb.bestelapp.repository.WinkelmandRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/api/winkelmand")
 public class WinkelmandController {
 
@@ -48,19 +49,19 @@ public class WinkelmandController {
     }
 
     @PutMapping("/{id}")
-    public Winkelmand updateWinkelMand(@PathVariable Long id, @RequestBody Winkelmand updated){
+    public ResponseEntity<Winkelmand> updateWinkelMand(@PathVariable Long id, @RequestBody Winkelmand updated){
         return winkelmandRepository.findById(id).map(item -> {
             item.setAantal(updated.getAantal());
-            return winkelmandRepository.save(item);
-        }).orElseThrow(() -> new RuntimeException("Item met id: " + id + " niet gevonden"));
+            return ResponseEntity.ok(winkelmandRepository.save(item));
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public void deleteWinkelMandItem(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWinkelMandItem(@PathVariable Long id) {
         if (!winkelmandRepository.existsById(id)) {
-            throw new RuntimeException("Item met id: " + id + " niet gevonden");
+            return ResponseEntity.notFound().build();
         }
-        winkelmandRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/all")

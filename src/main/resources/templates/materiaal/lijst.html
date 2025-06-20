@@ -71,9 +71,9 @@
                 <td th:text="${m.categorie}"></td>
                 <td th:text="${m.aantal}"></td>
                 <td>
-                    <form th:action="@{'/winkelmand/toevoegen/' + ${m.id}}" method="post" class="d-inline">
-                        <input type="hidden" name="aantal" value="1">
-                        <button type="submit" class="btn btn-sm btn-primary">Bestel</button>
+                    <form th:action="@{/winkelmand/toevoegen/{id}(id=${m.id})}" method="post" class="d-flex gap-2">
+                        <input type="number" name="aantal" value="1" min="1" class="form-control form-control-sm" style="width: 70px;">
+                        <button type="submit" class="btn btn-primary btn-sm">Bestel</button>
                     </form>
                 </td>
                 <td th:if="${currentUser.rol.name() == 'ADMIN' or currentUser.rol.name() == 'MAGAZIJNIER'}">
