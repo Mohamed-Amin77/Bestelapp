@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -33,6 +34,15 @@ public class WinkelmandPageController {
 
     @Autowired
     private UserRepository userRepository;
+
+    private List<String> afleveradressen = Arrays.asList(
+            "Limburg Aquafin",
+            "Antwerpen Aquafin",
+            "Oost-Vlaanderen Aquafin",
+            "West-Vlaanderen Aquafin",
+            "Vlaams-Brabant Aquafin",
+            "Brussel Aquafin"
+    );
 
     @PostMapping("/toevoegen/{materiaalId}")
     public String voegToe(@PathVariable Long materiaalId, @RequestParam(defaultValue = "1") int aantal, Principal principal) {
@@ -55,7 +65,30 @@ public class WinkelmandPageController {
 
         List<Winkelmand> mandItems = winkelmandRepository.findByTechnieker(user);
         model.addAttribute("mandItems", mandItems);
+        model.addAttribute("afleveradressen", afleveradressen);
         return "winkelmand/lijst";
+    }
+
+    @PostMapping("/bestellen")
+    public String bestellingPlaatsen(@RequestParam String afleveradres, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName());
+        List<Winkelmand> mandItems = winkelmandRepository.findByTechnieker(user);
+
+        if (mandItems.isEmpty()) {
+            return "redirect:/winkelmand?error=leeg";
+        }
+
+        Bestelling bestelling = new Bestelling();
+        bestelling.setTechnieker(user);
+        bestelling.setDatum(LocalDate.now());
+        bestelling.setStatus("Aangemaakt");
+        bestelling.setLeverdatum(LocalDate.now().plusDays(3));
+        bestelling.setAfleveradres(afleveradres);
+
+        bestellingRepository.save(bestelling);
+        winkelmandRepository.deleteAll(mandItems);
+
+        return "redirect:/bestellingen?success=besteld";
     }
 
     @GetMapping("/bestellen/overzicht")
