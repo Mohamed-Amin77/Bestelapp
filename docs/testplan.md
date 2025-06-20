@@ -13,13 +13,13 @@ Dit testplan beschrijft de belangrijkste testscenario's voor het controleren van
 ### Login - Correct
 
 **Beschrijving:** Gebruiker logt in met geldig e-mailadres en wachtwoord
-**Input:** [admin@ehb.be](mailto:admin@ehb.be) / Password!321
+**Input:** [admin@aquafin.be]/ Password!321
 **Verwacht resultaat:** Redirect naar dashboard
 
 ### Login - Fout wachtwoord
 
 **Beschrijving:** Gebruiker geeft fout wachtwoord in
-**Input:** [admin@ehb.be](mailto:admin@ehb.be) / foutwachtwoord
+**Input:** [admin@ehb.be]/ foutwachtwoord
 **Verwacht resultaat:** Foutmelding "Onjuiste gegevens"
 
 ### Ongeautoriseerde toegang

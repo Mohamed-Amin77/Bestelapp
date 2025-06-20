@@ -48,23 +48,6 @@
         <div class="d-flex justify-content-between mt-4">
             <a href="/materiaal/lijst" class="btn btn-secondary">Verder winkelen</a>
         </div>
-
-        <!-- Nieuw formulier voor afleveradres -->
-        <div class="mt-4">
-            <form th:action="@{/api/winkelmand/afrekenen}" method="post">
-                <label for="adres" class="form-label">Kies afleveradres:</label>
-                <select name="adres" id="adres" class="form-select mb-3" required>
-                    <option value="" disabled selected>-- Selecteer een adres --</option>
-                    <option value="Antwerpen - Aquafin Havenhuis">Antwerpen - Aquafin Havenhuis</option>
-                    <option value="Gent - Aquafin Watersportbaan">Gent - Aquafin Watersportbaan</option>
-                    <option value="Hasselt - Aquafin HQ Limburg">Hasselt - Aquafin HQ Limburg</option>
-                    <option value="Brugge - Aquafin Brugse Poort">Brugge - Aquafin Brugse Poort</option>
-                    <option value="Leuven - Aquafin Vaartkom">Leuven - Aquafin Vaartkom</option>
-                </select>
-                <button type="submit" class="btn btn-primary">Bestelling plaatsen</button>
-            </form>
-        </div>
-    </div>
 </main>
 
 <footer class="bg-dark text-white text-center p-2 mt-5">

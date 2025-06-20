@@ -21,10 +21,8 @@ Enkel geautoriseerde gebruikers krijgen toegang tot gevoelige functionaliteiten 
 
 # Richtlijnen & ethiek
 
-De code is geschreven volgens de professionele standaarden van secure web development (o.a. inputvalidatie, authenticatie, session management).
+De code is geschreven volgens de professionele standaarden van secure web development.
 
-Alle teamleden hebben zich gehouden aan de richtlijnen van de opleiding en de gedragscode van de onderwijsinstelling.
-
-Geen enkele vorm van plagiaat of ongepaste AI-gebruik is toegepast: alle AI-hulp is transparant gedocumenteerd in de README.
+Alle teamleden hebben zich gehouden aan de richtlijnen van de opleiding. Alle AI-hulp is transparant gedocumenteerd in de README.
 
 Bronvermeldingen (zoals afbeeldingen, API's of codefragmenten) zijn correct opgenomen.
