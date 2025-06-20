@@ -26,13 +26,6 @@ public class BestellingController {
     @Autowired
     private UserRepository userRepository;
 
-    // Alle bestellingen opvragen voor één user
-//    @GetMapping("/{userId}")
-//    public List<Bestelling> getBestellingByUser(@PathVariable Long userId) {
-//        User user = userRepository.findById(userId)
-//                .orElseThrow(() -> new RuntimeException("Technieker met id: " + userId + " niet gevonden."));
-//        return bestellingRepository.findByTechnieker(user);
-//    }
 
     @GetMapping("/bestellingen")
     public String toonBestellingen(Principal principal, Model model) {
@@ -111,13 +104,6 @@ public class BestellingController {
     }
 
 
-//    // Alleen eigen bestellingen (voor ingelogde technieker)
-//    @GetMapping("/mijn")
-//    public List<Bestelling> getEigenBestellingen(Authentication auth) {
-//        String email = auth.getName(); // haalt de e-mail op van de ingelogde gebruiker
-//        return bestellingRepository.findByTechnieker(email);
-//    }
-
     //only admin is able to delete
     @DeleteMapping("/{id}")
     public void deleteBestelling(@PathVariable Long id) {
@@ -144,8 +130,6 @@ public class BestellingController {
 
         bestellingRepository.deleteAll();
     }
-
-    //Method to change the bestelstatus ???
 
 
 

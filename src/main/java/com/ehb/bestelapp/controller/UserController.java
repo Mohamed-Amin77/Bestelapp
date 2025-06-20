@@ -44,19 +44,6 @@ public class UserController {
         return "gebruiker/bewerken"; // e.g. templates/gebruikers/bewerken.html
     }
 
-    //Save user update
-//    @PostMapping("/bewerken/{id}")
-//    public String updateUser(@PathVariable Long id, @ModelAttribute("user") User updated) {
-//        User user = userRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Gebruiker niet gevonden"));
-//
-//        user.setNaam(updated.getNaam());
-//        user.setEmail(updated.getEmail());
-//        user.setRol(updated.getRol());
-//
-//        userRepository.save(user);
-//        return "redirect:/gebruikers";
-//    }
 
     @PostMapping("/{id}/bewerken")
     public String updateUser(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
@@ -82,59 +69,4 @@ public class UserController {
         return "redirect:/gebruikers/list";
     }
 
-//    // Eén gebruiker opvragen (ID)
-//    @GetMapping("/{id}")
-//    public Optional<User> getById(@PathVariable Long id) {
-//        return userRepository.findById(id);
-//    }
-//
-//    // Nieuwe gebruiker toevoegen
-//    @PostMapping
-//    public User create(@Valid @RequestBody User user) {
-////        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-////            throw new RuntimeException("Email is al in gebruik");
-////        }
-//
-//        user.setWachtwoord(passwordEncoder.encode(user.getWachtwoord()));
-//
-//        return userRepository.save(user);
-//    }
-//
-//    // Gebruiker bijwerken
-//    @PutMapping("/{id}")
-//    public User update(@PathVariable Long id, @RequestBody User updated) {
-//        return userRepository.findById(id).map(u -> {
-//            u.setNaam(updated.getNaam());
-//            u.setEmail(updated.getEmail());
-//
-//            if (!updated.getWachtwoord().isBlank()) {
-////                u.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
-//            }
-//
-//            //u.setRol(updated.getRol());
-//            return userRepository.save(u);
-//
-//        // Als er geen gebruiker met dat ID is, wordt er een nieuwe gebruiker aangemaakt met die ID
-//        }).orElseGet(() -> {
-//            updated.setId(id);
-////            updated.setWachtwoord(passwordEncoder.encode(updated.getWachtwoord()));
-//            return userRepository.save(updated);
-//        });
-//    }
-//
-//
-//    @PutMapping("/{id}/make-admin")
-//    public User makeUserAdmin(@PathVariable Long id) {
-//        User user = userRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException("Gebruiker niet gevonden"));
-//
-//        user.setRol(Rol.ADMIN);
-//        return userRepository.save(user);
-//    }
-//
-//    // Gebruiker verwijderen
-//    @DeleteMapping("/{id}")
-//    public void delete(@PathVariable Long id) {
-//        userRepository.deleteById(id);
-//    }
 }
