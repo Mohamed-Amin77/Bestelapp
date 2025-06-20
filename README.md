@@ -152,7 +152,7 @@ De databasedump bevindt zich in de map `/database`. Elk bestand bevat een deel v
 
 ## Bronnen en digitale hulpmiddelen
 
-* ChatGPT (OpenAI): uitleg bij validatie en SpingSecurity (nieuwe onderdelen) en debug van code
+* ChatGPT (OpenAI): uitleg bij validatie en SpingSecurity (nieuwe onderdelen) en debug van code. En opbouw Readme.
 * StackOverflow: foutoplossingen
 * YouTube tutorials: Spring Boot + Thymeleaf
 
