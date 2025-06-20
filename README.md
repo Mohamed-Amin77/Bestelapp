@@ -40,20 +40,20 @@ Git-repo met commits per functionaliteit en aparte mappen voor model, controller
 
 ## Inhoudsopgave
 
-* [Technologieën](#-technologieën)
-* [Functionaliteiten](#-functionaliteiten)
-* [Database](#-database)
-* [Vereisten](#-vereisten)
-* [Installatie](#-installatie)
-* [Configuratie](#-configuratie)
-* [Projectstructuur](#-projectstructuur)
-* [API Endpoints](#-api-endpoints)
-* [Testen](#-testen)
-* [Team en werkverdeling](#-team-en-werkverdeling)
-* [Bronnen en digitale hulpmiddelen](#-bronnen-en-digitale-hulpmiddelen)
-* [Contributie](#-contributie)
-* [Licentie](#-licentie)
-* * [Schermafbeeldingen](#-schermafbeeldingen)
+* [Technologieën](#technologieën)
+* [Functionaliteiten](#functionaliteiten)
+* [Database](#database)
+* [Vereisten](#vereisten)
+* [Installatie](#installatie)
+* [Configuratie](#configuratie)
+* [Projectstructuur](#projectstructuur)
+* [API Endpoints](#api-endpoints)
+* [Testen](#testen)
+* [Team en werkverdeling](#team-en-werkverdeling)
+* [Bronnen en digitale hulpmiddelen](#bronnen-en-digitale-hulpmiddelen)
+* [Contributie](#contributie)
+* [Licentie](#licentie)
+* [Schermafbeeldingen](#schermafbeeldingen)
 
 ## Technologieën
 
