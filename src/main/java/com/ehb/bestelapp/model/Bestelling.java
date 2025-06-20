@@ -41,8 +41,7 @@ public class Bestelling {
     private LocalDate leverdatum;
 
 
-
-
+    private String afleveradres;
 
     public Bestelling() {
     }
@@ -103,5 +102,13 @@ public class Bestelling {
 
     public void setLeverdatum(LocalDate leverdatum) {
         this.leverdatum = leverdatum;
+    }
+
+    public String getAfleveradres() {
+        return afleveradres;
+    }
+
+    public void setAfleveradres(String afleveradres) {
+        this.afleveradres = afleveradres;
     }
 }
